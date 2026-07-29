@@ -223,7 +223,7 @@ class PopupApp {
 
     // Settings/upgrade
     document.getElementById('upgrade-btn')?.addEventListener('click', () => {
-      chrome.tabs.create({ url: 'https://tokentint.com/upgrade' });
+      chrome.tabs.create({ url: 'https://tokentint.vercel.app/upgrade' });
     });
 
     // Keyboard shortcuts
@@ -233,6 +233,33 @@ class PopupApp {
         this.pickColor();
       }
     });
+
+    document.getElementById('activate-license-btn')?.addEventListener('click', () => {
+      void this.activateLicense();
+    });
+  }
+
+  private async activateLicense() {
+    const input = document.getElementById('activation-token') as HTMLInputElement | null;
+    const token = input?.value.trim();
+    if (!token) {
+      this.showToast('Paste your activation token first.', 'error');
+      return;
+    }
+
+    const response = await chrome.runtime.sendMessage({
+      type: 'ACTIVATE_LICENSE',
+      payload: { token }
+    });
+
+    if (response.success) {
+      this.isPro = true;
+      this.updateProUI();
+      this.showToast('TokenTint Pro activated.');
+      if (input) input.value = '';
+    } else {
+      this.showToast(response.error || 'Activation failed.', 'error');
+    }
   }
 
   private async pickColor() {
@@ -267,7 +294,7 @@ class PopupApp {
 
   private async extractColors() {
     if (!this.isPro) {
-      chrome.tabs.create({ url: 'https://tokentint.com/upgrade' });
+      chrome.tabs.create({ url: 'https://tokentint.vercel.app/upgrade' });
       return;
     }
 
@@ -348,7 +375,7 @@ class PopupApp {
     if (!this.currentProject) return;
 
     if ((format === 'tailwind' || format === 'w3c') && !this.isPro) {
-      chrome.tabs.create({ url: 'https://tokentint.com/upgrade' });
+      chrome.tabs.create({ url: 'https://tokentint.vercel.app/upgrade' });
       return;
     }
 

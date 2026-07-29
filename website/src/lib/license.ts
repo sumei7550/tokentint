@@ -9,12 +9,17 @@ if (!SECRET) {
 
 export function generateActivationToken(email: string, orderId: string): string {
   const payload = JSON.stringify({
-    email,
-    orderId,
-    createdAt: Date.now()
+    customerId: email,
+    orderId
   });
 
-  const iv = crypto.randomBytes(16);
+  // Derive a stable IV from the purchase identifiers so a verified payment
+  // always receives the same token without requiring a database.
+  const iv = crypto
+    .createHmac('sha256', Buffer.from(SECRET, 'hex'))
+    .update(`tokentint-license:${email}:${orderId}`)
+    .digest()
+    .subarray(0, 16);
   const cipher = crypto.createCipheriv(ALGORITHM, Buffer.from(SECRET, 'hex'), iv);
 
   let encrypted = cipher.update(payload, 'utf8', 'hex');
@@ -31,7 +36,7 @@ export function generateActivationToken(email: string, orderId: string): string 
   ).toString('base64url');
 }
 
-export function verifyActivationToken(token: string): { email: string; orderId: string } | null {
+export function verifyActivationToken(token: string): { customerId: string; orderId: string } | null {
   try {
     const decoded = Buffer.from(token, 'base64url').toString('utf8');
     const { iv, data, tag } = JSON.parse(decoded);
@@ -50,7 +55,7 @@ export function verifyActivationToken(token: string): { email: string; orderId: 
     const payload = JSON.parse(decrypted);
 
     return {
-      email: payload.email,
+      customerId: payload.customerId,
       orderId: payload.orderId
     };
   } catch (error) {

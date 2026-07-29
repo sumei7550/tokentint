@@ -13,7 +13,7 @@ export default function SupportPage() {
 
             <section style={{ marginBottom: '32px', marginTop: '32px' }}>
               <h2>Need Help?</h2>
-              <p>We're here to help! Contact us at: support@tokentint.com</p>
+              <p>We're here to help! Contact us at: <a href="mailto:sumei7550@outlook.com">sumei7550@outlook.com</a></p>
             </section>
 
             <section style={{ marginBottom: '32px' }}>
@@ -29,7 +29,7 @@ export default function SupportPage() {
               <div style={{ marginTop: '24px' }}>
                 <h3>I lost my activation token</h3>
                 <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>
-                  Visit the <a href="/restore" style={{ color: 'var(--primary)' }}>restore page</a> to resend your token to your email.
+                  Your activation token is shown on the payment-success page. If you lost it, contact support with your Creem order ID.
                 </p>
               </div>
 
@@ -57,12 +57,12 @@ export default function SupportPage() {
 
             <section style={{ marginBottom: '32px' }}>
               <h2>Feature Requests</h2>
-              <p>Have an idea? Email us at: features@tokentint.com</p>
+              <p>Have an idea? <a href="https://github.com/sumei7550/tokentint/issues/new/choose">Open a feature request on GitHub</a>.</p>
             </section>
 
             <section style={{ marginBottom: '32px' }}>
               <h2>Bug Reports</h2>
-              <p>Found a bug? Email: bugs@tokentint.com</p>
+              <p>Found a bug? <a href="https://github.com/sumei7550/tokentint/issues/new/choose">Report it on GitHub</a>.</p>
               <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>
                 Include your Chrome version and steps to reproduce the issue.
               </p>

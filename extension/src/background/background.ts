@@ -1,5 +1,5 @@
 import { initStorage } from '../utils/storage';
-import { activateLicense, restoreLicense } from '../utils/license';
+import { activateLicense } from '../utils/license';
 import type { Message, MessageResponse } from '../types';
 
 chrome.runtime.onInstalled.addListener(async () => {
@@ -24,14 +24,6 @@ async function handleMessage(message: Message, sender: chrome.runtime.MessageSen
       case 'ACTIVATE_LICENSE':
         const activated = await activateLicense(message.payload.token);
         return { success: activated, data: { isPro: activated } };
-
-      case 'RESTORE_LICENSE':
-        const token = await restoreLicense(message.payload.email);
-        if (token) {
-          const restored = await activateLicense(token);
-          return { success: restored, data: { isPro: restored } };
-        }
-        return { success: false, error: 'No license found for this email' };
 
       default:
         return { success: false, error: 'Unknown message type' };

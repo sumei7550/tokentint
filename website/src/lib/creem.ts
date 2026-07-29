@@ -51,13 +51,33 @@ export function verifyWebhookSignature(payload: string, signature: string): bool
   return crypto.timingSafeEqual(sigBuf, digBuf);
 }
 
+export function verifyRedirectSignature(searchParams: URLSearchParams): boolean {
+  const apiKey = process.env.CREEM_API_KEY;
+  const signature = searchParams.get('signature');
+
+  if (!apiKey || !signature) return false;
+
+  const parts: string[] = [];
+  for (const [key, value] of searchParams.entries()) {
+    if (key === 'signature' || !value || value === 'null') continue;
+    parts.push(`${key}=${value}`);
+  }
+  parts.push(`salt=${apiKey}`);
+
+  const expected = crypto.createHash('sha256').update(parts.join('|')).digest('hex');
+  const expectedBuffer = Buffer.from(expected, 'utf8');
+  const signatureBuffer = Buffer.from(signature, 'utf8');
+  return expectedBuffer.length === signatureBuffer.length &&
+    crypto.timingSafeEqual(expectedBuffer, signatureBuffer);
+}
+
 export async function createCreemCheckout(email: string): Promise<CreemCheckoutResponse> {
   assertCreemEnv();
 
   const CREEM_API_KEY = process.env.CREEM_API_KEY as string;
   const CREEM_PRODUCT_ID = process.env.CREEM_PRODUCT_ID as string;
   const CREEM_API_BASE_URL = (process.env.CREEM_API_BASE_URL as string).replace(/\/$/, '');
-  const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://tokentint.com').replace(/\/$/, '');
+  const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://tokentint.vercel.app').replace(/\/$/, '');
 
   const endpoint = `${CREEM_API_BASE_URL}/v1/checkouts`;
 

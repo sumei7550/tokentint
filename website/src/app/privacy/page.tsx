@@ -43,14 +43,14 @@ export default function PrivacyPage() {
               <p>The extension only makes network requests when you:</p>
               <ul style={{ marginLeft: '24px', marginTop: '16px' }}>
                 <li>Activate your Pro license</li>
-                <li>Restore your purchase</li>
+                <li>Verify an activation token</li>
               </ul>
               <p style={{ marginTop: '16px' }}>Free features work completely offline.</p>
             </section>
 
             <section style={{ marginBottom: '32px' }}>
               <h2>Contact</h2>
-              <p>For privacy questions, contact us at: privacy@tokentint.com</p>
+              <p>For privacy questions, contact us at: <a href="mailto:sumei7550@outlook.com">sumei7550@outlook.com</a></p>
             </section>
           </div>
         </div>
