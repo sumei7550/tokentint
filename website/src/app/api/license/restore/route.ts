@@ -31,7 +31,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
-export function storeLicenseForRestore(email: string, token: string): void {
-  emailToTokenMap.set(email.toLowerCase(), token);
-}

@@ -41,7 +41,56 @@
   </style>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <header class="header">
+      <div class="logo">TokenTint</div>
+      <div class="header-actions">
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle theme">&#9681;</button>
+        <button id="upgrade-btn" class="icon-btn" type="button" data-i18n="upgrade">Upgrade to Pro</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <button id="pick-color-btn" class="btn" type="button" data-i18n="pickColor">Pick Color</button>
+        <button id="extract-colors-btn" class="btn btn-secondary" type="button" data-pro data-i18n="extractColors" style="margin-top: 8px">Extract Page Colors</button>
+      </section>
+
+      <section class="section">
+        <label class="section-title" for="format-selector">Format</label>
+        <div class="format-selector">
+          <select id="format-selector" aria-label="Color format">
+            <option value="hex">HEX</option>
+            <option value="rgb">RGB</option>
+            <option value="hsl">HSL</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="section">
+        <label class="section-title" for="project-selector" data-i18n="project">Project</label>
+        <div class="project-selector">
+          <select id="project-selector" aria-label="Project"></select>
+        </div>
+        <div id="project-colors"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-title" data-i18n="history">History</div>
+        <div id="color-history"></div>
+        <button id="clear-history" class="btn btn-secondary" type="button" data-i18n="clearHistory">Clear History</button>
+      </section>
+
+      <section class="section">
+        <div class="section-title" data-i18n="export">Export</div>
+        <div class="export-grid">
+          <button id="export-css" class="btn btn-secondary" type="button" data-i18n="exportCSS">CSS Variables</button>
+          <button id="export-tailwind" class="btn btn-secondary" type="button" data-pro data-i18n="exportTailwind">Tailwind Config</button>
+          <button id="export-w3c" class="btn btn-secondary" type="button" data-pro data-i18n="exportW3C">W3C Tokens</button>
+        </div>
+      </section>
+    </main>
+  </div>
   <script src="popup.js"></script>
 </body>
 </html>
