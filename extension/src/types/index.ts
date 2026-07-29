@@ -43,7 +43,7 @@ export interface ExtractedColor {
 }
 
 export interface Message {
-  type: 'PICK_COLOR' | 'EXTRACT_COLORS' | 'GET_ENTITLEMENT' | 'ACTIVATE_LICENSE' | 'RESTORE_LICENSE';
+  type: 'EXTRACT_COLORS' | 'GET_ENTITLEMENT' | 'ACTIVATE_LICENSE' | 'RESTORE_LICENSE';
   payload?: any;
 }
 

@@ -22,11 +22,16 @@ export default function UpgradePage() {
       });
 
       const data = await response.json();
+      const checkoutUrl = data.checkout_url || data.url;
 
-      if (data.url) {
-        window.location.href = data.url;
+      if (response.ok && checkoutUrl) {
+        window.location.href = checkoutUrl;
       } else {
-        setError('Failed to create checkout session');
+        const detail =
+          (data && (data.error as string)) ||
+          'Failed to create checkout session';
+        setError(detail);
+        console.error('Checkout response error:', data);
       }
     } catch (err) {
       setError('Something went wrong. Please try again.');

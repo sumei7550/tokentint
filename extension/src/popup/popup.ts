@@ -23,6 +23,20 @@ import {
 } from '../utils/export';
 import type { Color, Project, ColorFormat } from '../types';
 
+interface EyeDropperInstance {
+  open(): Promise<{ sRGBHex: string }>;
+}
+
+interface EyeDropperConstructor {
+  new(): EyeDropperInstance;
+}
+
+declare global {
+  interface Window {
+    EyeDropper?: EyeDropperConstructor;
+  }
+}
+
 class PopupApp {
   private currentProject: Project | null = null;
   private currentFormat: ColorFormat = 'hex';
@@ -222,27 +236,32 @@ class PopupApp {
   }
 
   private async pickColor() {
+    if (!window.EyeDropper) {
+      this.showToast('EyeDropper API is not supported in this browser.', 'error');
+      return;
+    }
+
     try {
-      const response = await chrome.runtime.sendMessage({ type: 'PICK_COLOR' });
+      const eyeDropper = new window.EyeDropper();
+      const result = await eyeDropper.open();
+      const color: Color = {
+        id: generateId(),
+        name: result.sRGBHex,
+        value: result.sRGBHex,
+        type: 'color',
+        timestamp: Date.now()
+      };
 
-      if (response.success) {
-        const color: Color = {
-          id: generateId(),
-          name: response.data.color,
-          value: response.data.color,
-          type: 'color',
-          timestamp: Date.now()
-        };
-
-        await addColorToHistory(color);
-        await this.renderHistory();
-
-        this.showToast(chrome.i18n.getMessage('colorPicked'));
-      } else {
-        this.showToast(response.error, 'error');
-      }
+      await addColorToHistory(color);
+      await this.renderHistory();
+      this.showToast(chrome.i18n.getMessage('colorPicked'));
     } catch (error) {
-      this.showToast(chrome.i18n.getMessage('pickColorError'), 'error');
+      const pickError = error as Error;
+      if (pickError.name === 'NotAllowedError' || pickError.name === 'AbortError') {
+        this.showToast('Color picking was cancelled.', 'error');
+      } else {
+        this.showToast(pickError.message || chrome.i18n.getMessage('pickColorError'), 'error');
+      }
     }
   }
 

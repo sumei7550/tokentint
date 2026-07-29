@@ -18,9 +18,6 @@ chrome.runtime.onMessage.addListener((
 async function handleMessage(message: Message, sender: chrome.runtime.MessageSender): Promise<MessageResponse> {
   try {
     switch (message.type) {
-      case 'PICK_COLOR':
-        return await handlePickColor();
-
       case 'EXTRACT_COLORS':
         return await handleExtractColors(sender.tab?.id);
 
@@ -40,23 +37,6 @@ async function handleMessage(message: Message, sender: chrome.runtime.MessageSen
         return { success: false, error: 'Unknown message type' };
     }
   } catch (error) {
-    return { success: false, error: (error as Error).message };
-  }
-}
-
-async function handlePickColor(): Promise<MessageResponse> {
-  if (!window.EyeDropper) {
-    return { success: false, error: 'EyeDropper API not supported' };
-  }
-
-  try {
-    const eyeDropper = new EyeDropper();
-    const result = await eyeDropper.open();
-    return { success: true, data: { color: result.sRGBHex } };
-  } catch (error) {
-    if ((error as Error).name === 'NotAllowedError') {
-      return { success: false, error: 'User cancelled color picking' };
-    }
     return { success: false, error: (error as Error).message };
   }
 }
@@ -217,17 +197,4 @@ function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
     g: parseInt(result[2], 16),
     b: parseInt(result[3], 16)
   } : null;
-}
-
-// EyeDropper API type definition
-interface EyeDropper {
-  open(): Promise<{ sRGBHex: string }>;
-}
-
-declare global {
-  interface Window {
-    EyeDropper?: {
-      new(): EyeDropper;
-    };
-  }
 }
