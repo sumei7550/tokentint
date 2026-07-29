@@ -83,8 +83,6 @@ export default function Home() {
                   <li>Multiple projects</li>
                   <li>Tailwind config export</li>
                   <li>W3C Design Tokens export</li>
-                  <li>WCAG contrast checker</li>
-                  <li>Backup import/export</li>
                 </ul>
                 <Link href="/upgrade" className="btn">
                   Upgrade to Pro

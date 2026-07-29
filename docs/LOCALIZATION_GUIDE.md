@@ -250,7 +250,13 @@ const message = chrome.i18n.getMessage(key, [count.toString()]);
 
 ## Website Localization
 
-Website is currently English-only. To add languages:
+The website uses a lightweight client-side language provider. Navigation, footer,
+and the upgrade page support English and Simplified Chinese; the initial locale
+uses the saved selection or the browser language. The remaining public content
+pages are English-only and should be translated before they are described as
+fully localized.
+
+To extend this coverage:
 
 ### 1. Next.js i18n
 

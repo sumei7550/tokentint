@@ -18,6 +18,7 @@ export interface Settings {
   theme: 'light' | 'dark' | 'system';
   defaultFormat: 'hex' | 'rgb' | 'hsl';
   locale: string;
+  activeProjectId?: string;
 }
 
 export interface Entitlement {
@@ -44,7 +45,10 @@ export interface ExtractedColor {
 
 export interface Message {
   type: 'EXTRACT_COLORS' | 'GET_ENTITLEMENT' | 'ACTIVATE_LICENSE' | 'RESTORE_LICENSE';
-  payload?: any;
+  payload?: {
+    tabId?: number;
+    token?: string;
+  };
 }
 
 export interface MessageResponse {

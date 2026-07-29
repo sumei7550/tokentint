@@ -90,6 +90,18 @@ export async function saveProject(project: Project): Promise<void> {
   await chrome.storage.local.set({ projects });
 }
 
+export async function createProject(name: string): Promise<Project> {
+  const project: Project = {
+    id: generateId(),
+    name,
+    colors: [],
+    createdAt: Date.now(),
+    updatedAt: Date.now()
+  };
+  await saveProject(project);
+  return project;
+}
+
 export async function deleteProject(projectId: string): Promise<void> {
   const projects = await getProjects();
   const filtered = projects.filter(p => p.id !== projectId);

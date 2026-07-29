@@ -5,6 +5,7 @@ import {
   addColorToHistory,
   clearColorHistory,
   getProjects,
+  createProject,
   saveProject,
   deleteProject,
   getSettings,
@@ -81,7 +82,8 @@ class PopupApp {
 
   private async loadProjects() {
     const projects = await getProjects();
-    this.currentProject = projects[0];
+    const settings = await getSettings();
+    this.currentProject = projects.find(project => project.id === settings.activeProjectId) || projects[0];
     this.renderProjectSelector(projects);
     this.renderCurrentProject();
   }
@@ -234,6 +236,26 @@ class PopupApp {
       }
     });
 
+    document.getElementById('project-selector')?.addEventListener('change', async (e) => {
+      const projectId = (e.target as HTMLSelectElement).value;
+      const projects = await getProjects();
+      this.currentProject = projects.find(project => project.id === projectId) || projects[0];
+      await updateSettings({ activeProjectId: this.currentProject?.id });
+      this.renderCurrentProject();
+    });
+
+    document.getElementById('new-project-btn')?.addEventListener('click', () => {
+      void this.createProject();
+    });
+
+    document.getElementById('rename-project-btn')?.addEventListener('click', () => {
+      void this.renameProject();
+    });
+
+    document.getElementById('delete-project-btn')?.addEventListener('click', () => {
+      void this.deleteCurrentProject();
+    });
+
     document.getElementById('activate-license-btn')?.addEventListener('click', () => {
       void this.activateLicense();
     });
@@ -260,6 +282,51 @@ class PopupApp {
     } else {
       this.showToast(response.error || 'Activation failed.', 'error');
     }
+  }
+
+  private async requireProjectPro(): Promise<boolean> {
+    if (this.isPro) return true;
+    chrome.tabs.create({ url: 'https://tokentint.vercel.app/upgrade' });
+    return false;
+  }
+
+  private async createProject() {
+    if (!await this.requireProjectPro()) return;
+
+    const name = window.prompt(this.message('projectNamePrompt', 'Project name'));
+    if (!name?.trim()) return;
+
+    this.currentProject = await createProject(name.trim());
+    await updateSettings({ activeProjectId: this.currentProject.id });
+    await this.loadProjects();
+  }
+
+  private async renameProject() {
+    if (!this.currentProject || !await this.requireProjectPro()) return;
+
+    const name = window.prompt(this.message('projectNamePrompt', 'Project name'), this.currentProject.name);
+    if (!name?.trim()) return;
+
+    this.currentProject.name = name.trim();
+    await saveProject(this.currentProject);
+    await this.loadProjects();
+  }
+
+  private async deleteCurrentProject() {
+    if (!this.currentProject || !await this.requireProjectPro()) return;
+
+    const projects = await getProjects();
+    if (projects.length === 1) {
+      this.showToast(this.message('keepOneProject', 'Keep at least one project.'), 'error');
+      return;
+    }
+
+    if (!window.confirm(this.message('deleteProjectConfirm', 'Delete project “$1”?').replace('$1', this.currentProject.name))) return;
+    await deleteProject(this.currentProject.id);
+    const remainingProjects = await getProjects();
+    this.currentProject = remainingProjects[0];
+    await updateSettings({ activeProjectId: this.currentProject.id });
+    await this.loadProjects();
   }
 
   private async pickColor() {
@@ -301,7 +368,18 @@ class PopupApp {
     try {
       this.showToast(chrome.i18n.getMessage('extracting'));
 
-      const response = await chrome.runtime.sendMessage({ type: 'EXTRACT_COLORS' });
+      // Popup messages do not have a sender.tab. Resolve the active page here and
+      // pass its id to the service worker explicitly.
+      const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+      if (!tab?.id) {
+        this.showToast('Open a webpage, then try extracting colors again.', 'error');
+        return;
+      }
+
+      const response = await chrome.runtime.sendMessage({
+        type: 'EXTRACT_COLORS',
+        payload: { tabId: tab.id }
+      });
 
       if (response.success) {
         const colors: Color[] = response.data.map((value: string) => ({
@@ -452,6 +530,17 @@ class PopupApp {
         (el as HTMLInputElement).placeholder = chrome.i18n.getMessage(key);
       }
     });
+
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const key = el.getAttribute('data-i18n-aria');
+      if (key) {
+        el.setAttribute('aria-label', this.message(key, el.getAttribute('aria-label') || ''));
+      }
+    });
+  }
+
+  private message(key: string, fallback: string): string {
+    return chrome.i18n.getMessage(key) || fallback;
   }
 }
 

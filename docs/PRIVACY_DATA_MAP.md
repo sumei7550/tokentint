@@ -44,12 +44,14 @@ This document maps all data collection, storage, and transmission in TokenTint f
    - Retention: Until user clears data
    - Access: Extension only
 
-**User Control:**
-- Clear all data: Settings → Clear Data
-- Delete projects: Project management UI
+**User Control (current UI):**
 - Clear history: History → Clear
-- Export backup: Settings → Export
-- Import backup: Settings → Import
+- Add and remove colors from project palettes
+- Pro: create, rename, switch, and delete project palettes
+- Browser-level extension data removal: Chrome → Extensions → TokenTint → Clear data
+
+Backup controls exist in storage utilities but are not exposed in the current
+popup; they must not be represented as available user controls until UI is added.
 
 **No sync:** Data is NOT synced to Chrome account
 

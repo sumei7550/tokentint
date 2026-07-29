@@ -1,401 +1,126 @@
 # Chrome Web Store Submission Checklist
 
-## Pre-Submission Requirements
+> Implementation status reviewed 2026-07-30. This document is the release
+> source of truth. Do not advertise roadmap features until they are usable in
+> the popup and represented by a real screenshot.
 
-### 1. Build Extension
+## 1. Build the extension
 
-```bash
+```powershell
 cd extension
-npm install
+npm run type-check
 npm run build
 ```
 
-Verify `dist/` directory contains:
-- [ ] manifest.json
-- [ ] popup.html
-- [ ] popup.js
-- [ ] background.js
-- [ ] content.js
-- [ ] icons/ (16, 48, 128 PNG)
-- [ ] _locales/ (en, zh_CN minimum)
+Verify `extension/dist/` contains:
 
-### 2. Create Distribution Package
+- [ ] `manifest.json`, `popup.html`, `popup.js`, and `background.js`
+- [ ] `icons/` with 16, 32, 48, and 128 px PNG files
+- [ ] `_locales/`
+- [ ] No persistent `content.js` or `<all_urls>` host permission
 
-```bash
-cd extension/dist
-zip -r tokentint-v1.0.0.zip .
-```
+Package the *contents* of `dist`, not its parent directory:
 
-**Or on Windows:**
 ```powershell
-Compress-Archive -Path dist\* -DestinationPath tokentint-v1.0.0.zip
+Compress-Archive -Path extension\dist\* -DestinationPath tokentint-v1.0.0.zip
 ```
 
-### 3. Test Extension Locally
+## 2. Manual QA
 
-1. Open Chrome: `chrome://extensions`
-2. Enable "Developer mode"
-3. Click "Load unpacked"
-4. Select `extension/dist` directory
-5. Verify:
-   - [ ] Extension loads without errors
-   - [ ] Popup opens correctly
-   - [ ] Pick color works
-   - [ ] History saves
-   - [ ] Projects work
-   - [ ] Export functions
-   - [ ] Dark/light mode
-   - [ ] All i18n strings display
+1. Go to `chrome://extensions`, enable Developer mode, then load `extension/dist`.
+2. After every build, use Reload before retesting.
+3. Confirm the following:
 
-### 4. Prepare Store Assets
+- [ ] The extension loads without errors.
+- [ ] Pick Color works and adds an item to the 20-color history.
+- [ ] A history color can be added to and removed from a project palette.
+- [ ] Pro users can create, switch, rename, and delete project palettes; the active project is remembered.
+- [ ] CSS Variables export works.
+- [ ] A Pro activation token is verified successfully.
+- [ ] Extract Page Colors succeeds on a normal webpage.
+- [ ] Extract Page Colors shows a clear error on Chrome-internal/restricted pages.
+- [ ] English and Simplified Chinese render without missing strings; hard-coded runtime prompts are either localized or accepted as English.
+- [ ] Light and dark themes render correctly.
 
-#### Icons (Required)
+## 3. Store assets
 
-- [ ] 16x16 PNG (toolbar icon)
-- [ ] 48x48 PNG (extension management)
-- [ ] 128x128 PNG (Chrome Web Store)
+### Icons
 
-**Design requirements:**
-- Transparent background
-- Consistent style
-- Recognizable at small sizes
-- Match brand colors
+- [x] 16 px, 48 px, and 128 px icons are present in `extension/public/icons/`.
+- [x] Transparent logo master: `extension/assets/tokentint-logo.png`.
+- [ ] Visually approve the 16 px toolbar icon in Chrome.
 
-#### Screenshots (Required: 1-5)
+### Screenshots
 
-**Dimensions:** 1280x800 or 640x400
+Chrome Web Store accepts 1–5 screenshots. Capture at 1280×800 or 640×400 from
+the actual built extension:
 
-Required screenshots:
-1. [ ] Main popup interface
-2. [ ] Color picking in action
-3. [ ] Project palette management
-4. [ ] Export options
-5. [ ] Settings/Pro features
+1. [ ] Main popup and history.
+2. [ ] Color picker being used on a real webpage.
+3. [ ] Creating a project and adding a color to its palette.
+4. [ ] CSS Variables export.
+5. [ ] Page-color extraction or Pro activation.
 
-**Tips:**
-- Use clean, real examples
-- Show actual functionality
-- Annotate if helpful
-- Light theme for consistency
+Do not use generated artwork as a screenshot.
 
-#### Promotional Images (Optional)
+### Optional promotional artwork
 
-- [ ] Small tile: 440x280 PNG
-- [ ] Marquee: 1400x560 PNG
+- [x] 440×280 tile: `extension/store-assets/promotional-tile-440x280.png`
+- [x] 1400×560 marquee: `extension/store-assets/promotional-marquee-1400x560.png`
 
-#### Video (Optional)
-- [ ] YouTube demo video
-
-### 5. Legal Documents
-
-Required URLs:
-- [ ] Privacy policy: `https://tokentint.com/privacy`
-- [ ] Terms of service: `https://tokentint.com/terms` (optional)
-- [ ] Support: `https://tokentint.com/support`
-
-Verify privacy policy includes:
-- [ ] Data collection (minimal)
-- [ ] Permission justifications
-- [ ] No analytics statement
-- [ ] User control over data
-- [ ] Contact information
-
-## Chrome Web Store Developer Account
-
-### 1. Create Developer Account
-
-1. Visit: https://chrome.google.com/webstore/devconsole
-2. Pay one-time fee: $5 USD
-3. Verify email
-
-### 2. Store Listing Information
-
-#### Basic Info
+## 4. Accurate listing copy
 
 **Name:** TokenTint
 
-**Summary (132 chars max):**
-```
-Pick colors. Ship tokens. Color picker with design token export.
-```
+**Short description:**
 
-**Description:**
-
-```markdown
-TokenTint is a clean, developer-focused color picker for Chrome.
-
-FREE FEATURES:
-• Pick any color with EyeDropper API
-• Copy in HEX, RGB, or HSL format
-• 20-color history
-• Project palette
-• CSS Variables export
-• Dark/light mode
-• Full keyboard navigation
-
-PRO FEATURES ($15 one-time):
-• Extract key colors from any page
-• Multiple project palettes
-• Tailwind config export
-• W3C Design Tokens export
-• WCAG contrast checker
-• Backup import/export
-
-PRIVACY:
-• All data stored locally
-• No analytics or tracking
-• Minimal permissions
-• Offline-capable
-
-ONE-TIME PURCHASE:
-• No subscription
-• Buy once, own forever
-• Works offline after activation
+```text
+Pick colors, save a palette, and export design tokens from Chrome.
 ```
 
-**Category:** Developer Tools
-
-**Language:** English (primary)
-
-#### Privacy
-
-**Single Purpose Description:**
-```
-TokenTint is a color picker and design token management tool for web developers and designers.
-```
-
-**Permission Justifications:**
-
-**storage:**
-```
-Store colors, projects, and user preferences locally in the browser.
-```
-
-**activeTab:**
-```
-Extract colors from the current page when user clicks "Extract Colors" button (Pro feature).
-```
-
-**scripting:**
-```
-Execute color extraction script in the active tab to analyze page colors (Pro feature).
-```
-
-**Host Permissions:**
-```
-None requested.
-```
-
-**Remote Code:**
-```
-No remote code is used.
-```
-
-#### Privacy Practices
-
-**Data Usage:**
-
-1. **What data is collected?**
-   - Email address (only for Pro purchase)
-   
-2. **How is it used?**
-   - Send license activation token
-   
-3. **Is it shared?**
-   - Yes, with Creem (payment processor)
-   
-4. **Is it sold?**
-   - No
-
-**Certifications:**
-- [ ] I certify that my product complies with Google's policies
-
-### 3. Distribution
-
-**Visibility:** Public
-
-**Regions:** All countries
-
-**Pricing:** Free (with in-extension purchase link)
-
-⚠️ **Important:** Chrome Web Store doesn't support paid extensions anymore. Pro purchase happens on external website.
-
-## Submission Checklist
-
-### Technical Review
-
-- [ ] Manifest V3 compliant
-- [ ] No console errors
-- [ ] All permissions justified
-- [ ] No external scripts loaded
-- [ ] No eval() or unsafe code
-- [ ] No obfuscation
-- [ ] Icons load correctly
-- [ ] All i18n keys have translations
-
-### Content Review
-
-- [ ] Description is accurate
-- [ ] Screenshots show real functionality
-- [ ] No misleading claims
-- [ ] No trademark violations
-- [ ] Support URL works
-- [ ] Privacy policy accessible
-
-### Policy Compliance
-
-- [ ] Single purpose
-- [ ] Minimal permissions
-- [ ] User data protection
-- [ ] No spam or deception
-- [ ] No malware
-- [ ] No prohibited content
-
-## Submission Process
-
-1. Go to: https://chrome.google.com/webstore/devconsole
-2. Click "New Item"
-3. Upload `tokentint-v1.0.0.zip`
-4. Fill in store listing
-5. Upload assets
-6. Submit for review
-
-**Review time:** 1-3 business days (typically)
-
-## After Approval
-
-### 1. Update Website
-
-Add Chrome Web Store badge:
-```html
-<a href="https://chrome.google.com/webstore/detail/YOUR_EXTENSION_ID">
-  <img src="chrome-web-store-badge.png" alt="Available in Chrome Web Store">
-</a>
-```
-
-### 2. Update Extension Links
-
-In `manifest.json`, add:
-```json
-{
-  "homepage_url": "https://tokentint.com"
-}
-```
-
-### 3. Monitor
-
-- [ ] User reviews
-- [ ] Crash reports
-- [ ] Support requests
-- [ ] Installation stats
-
-## Updates
-
-### Publishing Update
-
-1. Increment version in `manifest.json`
-2. Build new package
-3. Upload to Chrome Web Store
-4. Update "What's new" section
-5. Submit for review
-
-**Auto-updates:**
-- Chrome checks for updates every few hours
-- Users get updates automatically
-
-## Common Rejection Reasons
-
-### 1. Permissions Too Broad
-
-**Issue:** Requesting unnecessary permissions
-
-**Fix:**
-- Only request: storage, activeTab, scripting
-- Remove tabs, webRequest, cookies, etc.
-
-### 2. External Code
-
-**Issue:** Loading scripts from CDN
-
-**Fix:**
-- Bundle all code
-- No remote script loading
-- Check webpack config
-
-### 3. Privacy Policy
-
-**Issue:** Missing or inadequate privacy policy
-
-**Fix:**
-- Must be publicly accessible
-- Must explain data collection
-- Must justify permissions
-
-### 4. Misleading Functionality
-
-**Issue:** Description doesn't match features
-
-**Fix:**
-- Accurate description
-- Real screenshots
-- Clear Pro vs Free distinction
-
-### 5. Keyword Stuffing
-
-**Issue:** Too many keywords in description
-
-**Fix:**
-- Natural language
-- Focus on features
-- Avoid repetition
-
-## Troubleshooting
-
-### Build Fails
-
-```bash
-cd extension
-rm -rf node_modules dist
-npm install
-npm run build
-```
-
-### Manifest Errors
-
-Validate at: https://developer.chrome.com/docs/extensions/mv3/manifest/
-
-Common issues:
-- Missing required fields
-- Invalid permission names
-- Incorrect version format
-
-### Icons Not Loading
-
-- Verify PNG format (not JPG)
-- Check dimensions (exact pixels)
-- Ensure correct paths in manifest
-
-### i18n Errors
-
-- All keys must exist in all locales
-- Check JSON syntax
-- Verify default_locale in manifest
-
-## Post-Launch Checklist
-
-- [ ] Monitor first 24 hours for crashes
-- [ ] Respond to early reviews
-- [ ] Fix critical bugs quickly
-- [ ] Update documentation if needed
-- [ ] Announce launch (Twitter, etc.)
-
-## Support Resources
-
-**Chrome Web Store:**
-- Developer console: https://chrome.google.com/webstore/devconsole
-- Documentation: https://developer.chrome.com/docs/webstore
-- Support: https://support.google.com/chrome_webstore
-
-**TokenTint:**
-- Support email: support@tokentint.com
-- Issues: (Your GitHub if public)
+**Feature claims currently supported by the popup:**
+
+- Pick colors with the EyeDropper API.
+- Copy HEX, RGB, and HSL values.
+- Keep a local history of up to 20 colors.
+- Maintain one local default project palette; Pro unlocks multiple project palettes.
+- Export CSS Variables; Pro unlocks Tailwind and W3C token exports.
+- Pro can extract key computed CSS colors from the active webpage.
+- Use a light or dark theme and the color-picker keyboard shortcut.
+
+**Do not claim yet:** a WCAG contrast-checker UI, backup import/export UI, or
+full keyboard navigation.
+
+The extension popup has complete English and Simplified Chinese message catalogs,
+but a few runtime error and activation prompts are still hard-coded in English.
+The website navigation, footer, and upgrade page offer English and Simplified
+Chinese; remaining public content pages are English-only. Other packaged
+extension locales contain only the name and description and must not be
+advertised as full UI translations.
+
+## 5. Privacy and permissions
+
+**Permissions:**
+
+- `storage`: stores color history, palette, settings, and local entitlement.
+- `activeTab`: provides temporary access to the user-selected page after an
+  extension action.
+- `scripting`: runs page-color extraction only after the user clicks Extract.
+- No host permissions and no persistent content script.
+
+**Disclosure checklist:**
+
+- [ ] State that page-color extraction reads computed style colors from the active page only when the user requests it.
+- [ ] State that colors, palette data, settings, and activation entitlement are stored locally.
+- [ ] Link the live privacy policy, terms/refund policy, and support page.
+- [ ] If external checkout is used, clearly identify the seller, price, refund terms, and payment processor.
+- [ ] Confirm the Store dashboard privacy fields match the actual data handling.
+
+## 6. Submission gate
+
+- [ ] Manifest V3 and all permissions are justified by implemented features.
+- [ ] No external code, `eval`, obfuscation, or unused broad permissions.
+- [ ] No console errors in popup, service worker, or a tested webpage.
+- [ ] Store description and screenshots describe only implemented functionality.
+- [ ] The public privacy, support, terms, and refund URLs work in production.
+- [ ] Verify the current Chrome Web Store payment and policy requirements before submitting.

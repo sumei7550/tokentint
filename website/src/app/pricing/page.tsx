@@ -22,7 +22,6 @@ export default function PricingPage() {
                   <li>Single project palette</li>
                   <li>CSS Variables export</li>
                   <li>Dark/light mode</li>
-                  <li>Full keyboard navigation</li>
                 </ul>
                 <Link href="https://chrome.google.com/webstore" className="btn">
                   Add to Chrome
@@ -40,8 +39,6 @@ export default function PricingPage() {
                   <li>Unlimited project palettes</li>
                   <li>Tailwind config export</li>
                   <li>W3C Design Tokens export</li>
-                  <li>WCAG contrast checker</li>
-                  <li>Backup import/export</li>
                   <li>Priority support</li>
                 </ul>
                 <Link href="/upgrade" className="btn">

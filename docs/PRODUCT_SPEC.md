@@ -25,6 +25,17 @@
 
 ## Feature Matrix
 
+### Current implementation boundary (2026-07-30)
+
+The feature tables below include roadmap items. The shipping popup has local
+project palettes (one free default palette; multiple palettes for Pro),
+page-color extraction, CSS/Tailwind/W3C exports, history, color picking, and
+token activation. It does not expose a WCAG checker UI or backup import/export
+controls. Chrome i18n applies to the popup only; several runtime prompts still
+need localization. The website navigation, footer, and upgrade page provide an
+English/Simplified Chinese toggle; its other public content pages are currently
+English-only.
+
 ### Free Features
 
 | Feature | Description | Implementation |

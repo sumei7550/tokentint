@@ -82,5 +82,23 @@
   },
   "settings": {
     "message": "Settings"
+  },
+  "newProject": {
+    "message": "New project"
+  },
+  "renameProject": {
+    "message": "Rename project"
+  },
+  "deleteProject": {
+    "message": "Delete project"
+  },
+  "projectNamePrompt": {
+    "message": "Project name"
+  },
+  "keepOneProject": {
+    "message": "Keep at least one project."
+  },
+  "deleteProjectConfirm": {
+    "message": "Delete project “$1”?"
   }
 }

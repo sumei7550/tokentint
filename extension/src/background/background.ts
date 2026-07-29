@@ -19,10 +19,10 @@ async function handleMessage(message: Message, sender: chrome.runtime.MessageSen
   try {
     switch (message.type) {
       case 'EXTRACT_COLORS':
-        return await handleExtractColors(sender.tab?.id);
+        return await handleExtractColors(message.payload?.tabId);
 
       case 'ACTIVATE_LICENSE':
-        const activated = await activateLicense(message.payload.token);
+        const activated = await activateLicense(message.payload?.token ?? '');
         return { success: activated, data: { isPro: activated } };
 
       default:
@@ -35,7 +35,7 @@ async function handleMessage(message: Message, sender: chrome.runtime.MessageSen
 
 async function handleExtractColors(tabId?: number): Promise<MessageResponse> {
   if (!tabId) {
-    return { success: false, error: 'No active tab' };
+    return { success: false, error: 'No active webpage is available. Open a webpage and try again.' };
   }
 
   try {
@@ -50,7 +50,14 @@ async function handleExtractColors(tabId?: number): Promise<MessageResponse> {
 
     return { success: false, error: 'Failed to extract colors' };
   } catch (error) {
-    return { success: false, error: (error as Error).message };
+    const message = (error as Error).message;
+    if (/Cannot access contents of url|extensions gallery|chrome:\/\//i.test(message)) {
+      return {
+        success: false,
+        error: 'Chrome does not allow color extraction on this page. Try a regular website instead.'
+      };
+    }
+    return { success: false, error: message };
   }
 }
 

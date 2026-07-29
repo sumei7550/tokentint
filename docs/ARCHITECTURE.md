@@ -44,14 +44,12 @@
 **Popup (popup.html/js/css):**
 - Main UI
 - Color history display
-- Project management
+- Project palette management (Pro: create, switch, rename, delete)
 - Export controls
-- Settings
+- Theme and token activation controls
 
-**Content Script (content.js):**
-- Minimal presence
-- Only used for injected color extraction
-- Runs in page context when triggered
+Page color extraction runs on demand through `chrome.scripting.executeScript`.
+There is no persistent content script and no `<all_urls>` host permission.
 
 ### Permission Model
 

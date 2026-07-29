@@ -82,5 +82,23 @@
   },
   "settings": {
     "message": "设置"
+  },
+  "newProject": {
+    "message": "新建项目"
+  },
+  "renameProject": {
+    "message": "重命名项目"
+  },
+  "deleteProject": {
+    "message": "删除项目"
+  },
+  "projectNamePrompt": {
+    "message": "项目名称"
+  },
+  "keepOneProject": {
+    "message": "至少保留一个项目。"
+  },
+  "deleteProjectConfirm": {
+    "message": "删除项目“$1”？"
   }
 }
