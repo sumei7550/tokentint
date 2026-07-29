@@ -62,6 +62,16 @@ body {
   list-style: none;
 }
 
+.language-toggle {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  padding: 4px 8px;
+}
+
 .nav-links a {
   color: var(--text);
   text-decoration: none;

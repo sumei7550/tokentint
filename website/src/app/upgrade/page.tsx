@@ -3,11 +3,32 @@
 import { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/components/LanguageProvider';
 
 export default function UpgradePage() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const { locale } = useLanguage();
+  const copy = locale === 'zh-CN' ? {
+    title: '升级到 Pro',
+    description: '一次性支付 15 美元，即可永久使用全部 Pro 功能。',
+    email: '电子邮箱',
+    processing: '正在跳转支付…',
+    continue: '继续支付',
+    secure: '由 Creem 提供安全支付服务',
+    genericError: '发生错误，请重试。',
+    checkoutError: '无法创建支付会话'
+  } : {
+    title: 'Upgrade to Pro',
+    description: 'Get lifetime access to all Pro features for a one-time payment of $15.',
+    email: 'Email Address',
+    processing: 'Processing...',
+    continue: 'Continue to Payment',
+    secure: 'Secure payment powered by Creem',
+    genericError: 'Something went wrong. Please try again.',
+    checkoutError: 'Failed to create checkout session'
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,12 +50,12 @@ export default function UpgradePage() {
       } else {
         const detail =
           (data && (data.error as string)) ||
-          'Failed to create checkout session';
+          copy.checkoutError;
         setError(detail);
         console.error('Checkout response error:', data);
       }
     } catch (err) {
-      setError('Something went wrong. Please try again.');
+      setError(copy.genericError);
     } finally {
       setLoading(false);
     }
@@ -47,14 +68,14 @@ export default function UpgradePage() {
       <main>
         <div className="container">
           <div className="card">
-            <h2>Upgrade to Pro</h2>
+            <h2>{copy.title}</h2>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '32px' }}>
-              Get lifetime access to all Pro features for a one-time payment of $15.
+              {copy.description}
             </p>
 
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="email">Email Address</label>
+                <label htmlFor="email">{copy.email}</label>
                 <input
                   type="email"
                   id="email"
@@ -69,12 +90,12 @@ export default function UpgradePage() {
               {error && <p className="error">{error}</p>}
 
               <button type="submit" className="btn" disabled={loading}>
-                {loading ? 'Processing...' : 'Continue to Payment'}
+                {loading ? copy.processing : copy.continue}
               </button>
             </form>
 
             <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginTop: '24px', textAlign: 'center' }}>
-              Secure payment powered by Creem
+              {copy.secure}
             </p>
           </div>
         </div>
