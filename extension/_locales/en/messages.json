@@ -1,104 +1,104 @@
 {
-  "extension_name": {
-    "message": "TokenTint"
-  },
-  "extension_description": {
-    "message": "Pick colors. Ship tokens."
-  },
-  "pickColor": {
-    "message": "Pick Color"
-  },
-  "extractColors": {
-    "message": "Extract Page Colors"
-  },
-  "history": {
-    "message": "History"
-  },
-  "project": {
-    "message": "Project"
-  },
-  "export": {
-    "message": "Export"
-  },
-  "copy": {
-    "message": "Copy"
-  },
-  "remove": {
-    "message": "Remove"
-  },
-  "addToProject": {
-    "message": "Add to Project"
-  },
-  "noColors": {
-    "message": "No colors yet"
-  },
-  "noHistory": {
-    "message": "No history yet"
-  },
-  "colorPicked": {
-    "message": "Color picked!"
-  },
-  "pickColorError": {
-    "message": "Failed to pick color"
-  },
-  "extracting": {
-    "message": "Extracting colors..."
-  },
-  "colorsExtracted": {
-    "message": "$1 colors extracted"
-  },
-  "extractError": {
-    "message": "Failed to extract colors"
-  },
-  "copied": {
-    "message": "Copied to clipboard"
-  },
-  "addedToProject": {
-    "message": "Added to project"
-  },
-  "exported": {
-    "message": "Exported successfully"
-  },
-  "historyCleared": {
-    "message": "History cleared"
-  },
-  "confirmClearHistory": {
-    "message": "Clear all color history?"
-  },
-  "exportCSS": {
-    "message": "CSS Variables"
-  },
-  "exportTailwind": {
-    "message": "Tailwind Config"
-  },
-  "exportW3C": {
-    "message": "W3C Tokens"
-  },
-  "clearHistory": {
-    "message": "Clear History"
-  },
-  "upgrade": {
-    "message": "Upgrade to Pro"
-  },
-  "settings": {
-    "message": "Settings"
-  },
-  "newProject": {
-    "message": "New project"
-  },
-  "renameProject": {
-    "message": "Rename project"
-  },
-  "deleteProject": {
-    "message": "Delete project"
-  },
-  "projectNamePrompt": {
-    "message": "Project name"
-  },
-  "keepOneProject": {
-    "message": "Keep at least one project."
-  },
-  "deleteProjectConfirm": {
-    "message": "Delete project “$1”?"
-  }
+    "extension_name":  {
+                           "message":  "TokenTint – Color Picker \u0026 Design Tokens"
+                       },
+    "extension_description":  {
+                                  "message":  "Pick colors from webpages, save palettes, copy HEX/RGB/HSL, and export CSS, Tailwind, or W3C design tokens."
+                              },
+    "pickColor":  {
+                      "message":  "Pick Color"
+                  },
+    "extractColors":  {
+                          "message":  "Extract Page Colors"
+                      },
+    "history":  {
+                    "message":  "History"
+                },
+    "project":  {
+                    "message":  "Project"
+                },
+    "export":  {
+                   "message":  "Export"
+               },
+    "copy":  {
+                 "message":  "Copy"
+             },
+    "remove":  {
+                   "message":  "Remove"
+               },
+    "addToProject":  {
+                         "message":  "Add to Project"
+                     },
+    "noColors":  {
+                     "message":  "No colors yet"
+                 },
+    "noHistory":  {
+                      "message":  "No history yet"
+                  },
+    "colorPicked":  {
+                        "message":  "Color picked!"
+                    },
+    "pickColorError":  {
+                           "message":  "Failed to pick color"
+                       },
+    "extracting":  {
+                       "message":  "Extracting colors..."
+                   },
+    "colorsExtracted":  {
+                            "message":  "$1 colors extracted"
+                        },
+    "extractError":  {
+                         "message":  "Failed to extract colors"
+                     },
+    "copied":  {
+                   "message":  "Copied to clipboard"
+               },
+    "addedToProject":  {
+                           "message":  "Added to project"
+                       },
+    "exported":  {
+                     "message":  "Exported successfully"
+                 },
+    "historyCleared":  {
+                           "message":  "History cleared"
+                       },
+    "confirmClearHistory":  {
+                                "message":  "Clear all color history?"
+                            },
+    "exportCSS":  {
+                      "message":  "CSS Variables"
+                  },
+    "exportTailwind":  {
+                           "message":  "Tailwind Config"
+                       },
+    "exportW3C":  {
+                      "message":  "W3C Tokens"
+                  },
+    "clearHistory":  {
+                         "message":  "Clear History"
+                     },
+    "upgrade":  {
+                    "message":  "Upgrade to Pro"
+                },
+    "settings":  {
+                     "message":  "Settings"
+                 },
+    "newProject":  {
+                       "message":  "New project"
+                   },
+    "renameProject":  {
+                          "message":  "Rename project"
+                      },
+    "deleteProject":  {
+                          "message":  "Delete project"
+                      },
+    "projectNamePrompt":  {
+                              "message":  "Project name"
+                          },
+    "keepOneProject":  {
+                           "message":  "Keep at least one project."
+                       },
+    "deleteProjectConfirm":  {
+                                 "message":  "Delete project \"$1\"?"
+                             }
 }

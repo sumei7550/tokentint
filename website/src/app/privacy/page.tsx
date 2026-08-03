@@ -20,6 +20,7 @@ export default function PrivacyPage() {
               <ul style={{ marginLeft: '24px', marginTop: '16px' }}>
                 <li>Email address (only for Pro purchases)</li>
                 <li>Payment information (processed by Creem, not stored by us)</li>
+                <li>Activation token or purchase email only when you activate or restore a Pro license</li>
               </ul>
             </section>
 
@@ -44,8 +45,19 @@ export default function PrivacyPage() {
               <ul style={{ marginLeft: '24px', marginTop: '16px' }}>
                 <li>Activate your Pro license</li>
                 <li>Verify an activation token</li>
+                <li>Restore a purchase using the email address you provide</li>
               </ul>
               <p style={{ marginTop: '16px' }}>Free features work completely offline.</p>
+            </section>
+
+            <section style={{ marginBottom: '32px' }}>
+              <h2>Active Page Color Extraction</h2>
+              <p>When you explicitly click Extract Page Colors, TokenTint temporarily reads computed style colors from the selected active tab. The extracted colors are used only to provide the feature and are saved locally in your browser. Page content, URLs, and browsing history are not sent to our servers.</p>
+            </section>
+
+            <section style={{ marginBottom: '32px' }}>
+              <h2>Data Storage and Sharing</h2>
+              <p>Color history, project palettes, settings, and the local Pro entitlement are stored in Chrome local extension storage and are not synced to your Google account. Purchase and license requests are handled by our server and Creem, our payment processor. We do not sell data, use it for advertising, or use analytics or tracking tools.</p>
             </section>
 
             <section style={{ marginBottom: '32px' }}>

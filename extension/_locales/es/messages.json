@@ -1,8 +1,8 @@
-{
-  "extension_name": {
-    "message": "TokenTint"
-  },
-  "extension_description": {
-    "message": "Elige colores. Envía tokens."
-  }
+﻿{
+    "extension_name":  {
+                           "message":  "TokenTint – Selector de color y tokens de diseño"
+                       },
+    "extension_description":  {
+                                  "message":  "Captura colores de páginas web, guarda paletas, copia HEX/RGB/HSL y exporta tokens CSS, Tailwind o W3C."
+                              }
 }

@@ -1,104 +1,36 @@
-{
-  "extension_name": {
-    "message": "TokenTint"
-  },
-  "extension_description": {
-    "message": "取色器与设计令牌工具"
-  },
-  "pickColor": {
-    "message": "拾取颜色"
-  },
-  "extractColors": {
-    "message": "提取页面颜色"
-  },
-  "history": {
-    "message": "历史记录"
-  },
-  "project": {
-    "message": "项目"
-  },
-  "export": {
-    "message": "导出"
-  },
-  "copy": {
-    "message": "复制"
-  },
-  "remove": {
-    "message": "移除"
-  },
-  "addToProject": {
-    "message": "添加到项目"
-  },
-  "noColors": {
-    "message": "暂无颜色"
-  },
-  "noHistory": {
-    "message": "暂无历史记录"
-  },
-  "colorPicked": {
-    "message": "颜色已拾取！"
-  },
-  "pickColorError": {
-    "message": "拾取颜色失败"
-  },
-  "extracting": {
-    "message": "正在提取颜色..."
-  },
-  "colorsExtracted": {
-    "message": "已提取 $1 个颜色"
-  },
-  "extractError": {
-    "message": "提取颜色失败"
-  },
-  "copied": {
-    "message": "已复制到剪贴板"
-  },
-  "addedToProject": {
-    "message": "已添加到项目"
-  },
-  "exported": {
-    "message": "导出成功"
-  },
-  "historyCleared": {
-    "message": "历史记录已清除"
-  },
-  "confirmClearHistory": {
-    "message": "确定清除所有颜色历史记录？"
-  },
-  "exportCSS": {
-    "message": "CSS 变量"
-  },
-  "exportTailwind": {
-    "message": "Tailwind 配置"
-  },
-  "exportW3C": {
-    "message": "W3C 令牌"
-  },
-  "clearHistory": {
-    "message": "清除历史"
-  },
-  "upgrade": {
-    "message": "升级到 Pro"
-  },
-  "settings": {
-    "message": "设置"
-  },
-  "newProject": {
-    "message": "新建项目"
-  },
-  "renameProject": {
-    "message": "重命名项目"
-  },
-  "deleteProject": {
-    "message": "删除项目"
-  },
-  "projectNamePrompt": {
-    "message": "项目名称"
-  },
-  "keepOneProject": {
-    "message": "至少保留一个项目。"
-  },
-  "deleteProjectConfirm": {
-    "message": "删除项目“$1”？"
-  }
+﻿{
+  "extension_name": { "message": "TokenTint – 取色器与设计令牌" },
+  "extension_description": { "message": "从网页取色、保存调色板、复制 HEX/RGB/HSL，并导出 CSS、Tailwind 或 W3C 设计令牌。" },
+  "pickColor": { "message": "取色" },
+  "extractColors": { "message": "提取页面颜色" },
+  "history": { "message": "历史记录" },
+  "project": { "message": "项目" },
+  "export": { "message": "导出" },
+  "copy": { "message": "复制" },
+  "remove": { "message": "移除" },
+  "addToProject": { "message": "添加到项目" },
+  "noColors": { "message": "暂无颜色" },
+  "noHistory": { "message": "暂无历史记录" },
+  "colorPicked": { "message": "已取色！" },
+  "pickColorError": { "message": "取色失败" },
+  "extracting": { "message": "正在提取颜色…" },
+  "colorsExtracted": { "message": "已提取 $1 个颜色" },
+  "extractError": { "message": "提取颜色失败" },
+  "copied": { "message": "已复制到剪贴板" },
+  "addedToProject": { "message": "已添加到项目" },
+  "exported": { "message": "导出成功" },
+  "historyCleared": { "message": "历史记录已清除" },
+  "confirmClearHistory": { "message": "确定清除全部颜色历史记录吗？" },
+  "exportCSS": { "message": "CSS 变量" },
+  "exportTailwind": { "message": "Tailwind 配置" },
+  "exportW3C": { "message": "W3C 令牌" },
+  "clearHistory": { "message": "清除历史记录" },
+  "upgrade": { "message": "升级到 Pro" },
+  "settings": { "message": "设置" },
+  "newProject": { "message": "新建项目" },
+  "renameProject": { "message": "重命名项目" },
+  "deleteProject": { "message": "删除项目" },
+  "projectNamePrompt": { "message": "项目名称" },
+  "keepOneProject": { "message": "至少保留一个项目。" },
+  "deleteProjectConfirm": { "message": "确定删除项目“$1”吗？" }
 }
