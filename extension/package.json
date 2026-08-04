@@ -4,9 +4,13 @@
   "description": "Pick colors. Ship tokens.",
   "private": true,
   "scripts": {
-    "dev": "webpack --watch --mode development",
+    "dev": "webpack --watch --mode development --env target=local",
     "build": "webpack --mode production",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "dev:local": "webpack --watch --mode development --env target=local",
+    "dev:production": "webpack --watch --mode development --env target=production",
+    "build:local": "webpack --mode production --env target=local",
+    "build:production": "webpack --mode production --env target=production"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.268",

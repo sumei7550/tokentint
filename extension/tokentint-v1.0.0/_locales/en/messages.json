@@ -1,4 +1,4 @@
-{
+﻿{
     "extension_name":  {
                            "message":  "TokenTint – Color Picker \u0026 Design Tokens"
                        },
@@ -47,9 +47,6 @@
     "colorsExtracted":  {
                             "message":  "$1 colors extracted"
                         },
-    "pageExtractionNotSupported":  {
-                                      "message":  "Page not supported"
-                                  },
     "extractError":  {
                          "message":  "Failed to extract colors"
                      },
@@ -102,6 +99,6 @@
                            "message":  "Keep at least one project."
                        },
     "deleteProjectConfirm":  {
-                                 "message":  "Delete project \"$1\"?"
+                                 "message":  "Delete project 鈥?1鈥?"
                              }
 }

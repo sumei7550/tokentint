@@ -1,0 +1,4 @@
+﻿{
+  "extension_name": { "message": "TokenTint – 색상 추출기와 디자인 토큰" },
+  "extension_description": { "message": "웹페이지에서 색상을 추출하고 팔레트를 저장하세요. HEX/RGB/HSL 복사와 CSS·Tailwind·W3C 토큰 내보내기를 지원합니다." }
+}

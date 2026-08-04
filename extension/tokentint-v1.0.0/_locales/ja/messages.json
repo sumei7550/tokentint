@@ -1,0 +1,4 @@
+﻿{
+  "extension_name": { "message": "TokenTint – カラーピッカーとデザイントークン" },
+  "extension_description": { "message": "ウェブページから色を取得し、パレットを保存。HEX/RGB/HSLをコピーして、CSS・Tailwind・W3Cトークンを書き出せます。" }
+}

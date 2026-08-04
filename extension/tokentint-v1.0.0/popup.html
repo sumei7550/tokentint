@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TokenTint</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 360px;
+      min-height: 400px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --text: #10131A;
+      --text-secondary: #6c757d;
+      --border: #e9ecef;
+      --primary: #635BFF;
+      --teal: #22D3C5;
+      --pink: #FF6B9D;
+      --focus: #635BFF;
+    }
+
+    [data-theme="dark"] {
+      --bg: #10131A;
+      --bg-secondary: #1a1d26;
+      --text: #ffffff;
+      --text-secondary: #a8adb7;
+      --border: #2a2d36;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <div class="logo">TokenTint</div>
+      <div class="header-actions">
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle theme">&#9681;</button>
+        <button id="upgrade-btn" class="icon-btn" type="button" data-i18n="upgrade">Upgrade to Pro</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <button id="pick-color-btn" class="btn" type="button" data-i18n="pickColor">Pick Color</button>
+        <button id="extract-colors-btn" class="btn btn-secondary" type="button" data-pro data-i18n="extractColors" style="margin-top: 8px">Extract Page Colors</button>
+      </section>
+
+      <section class="section">
+        <label class="section-title" for="activation-token">Activate Pro</label>
+        <input id="activation-token" type="text" placeholder="Paste activation token" autocomplete="off">
+        <button id="activate-license-btn" class="btn btn-secondary" type="button" style="margin-top: 8px">Activate Token</button>
+      </section>
+
+      <section class="section">
+        <label class="section-title" for="format-selector">Format</label>
+        <div class="format-selector">
+          <select id="format-selector" aria-label="Color format">
+            <option value="hex">HEX</option>
+            <option value="rgb">RGB</option>
+            <option value="hsl">HSL</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="section">
+        <label class="section-title" for="project-selector" data-i18n="project">Project</label>
+        <div class="project-selector">
+          <select id="project-selector" aria-label="Project"></select>
+          <button id="new-project-btn" class="icon-btn" type="button" data-i18n-aria="newProject" aria-label="New project">+</button>
+          <button id="rename-project-btn" class="icon-btn" type="button" data-i18n-aria="renameProject" aria-label="Rename project">&#9998;</button>
+          <button id="delete-project-btn" class="icon-btn" type="button" data-i18n-aria="deleteProject" aria-label="Delete project">&#128465;</button>
+        </div>
+        <div id="project-colors"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-title" data-i18n="history">History</div>
+        <div id="color-history"></div>
+        <button id="clear-history" class="btn btn-secondary" type="button" data-i18n="clearHistory">Clear History</button>
+      </section>
+
+      <section class="section">
+        <div class="section-title" data-i18n="export">Export</div>
+        <div class="export-grid">
+          <button id="export-css" class="btn btn-secondary" type="button" data-i18n="exportCSS">CSS Variables</button>
+          <button id="export-tailwind" class="btn btn-secondary" type="button" data-pro data-i18n="exportTailwind">Tailwind Config</button>
+          <button id="export-w3c" class="btn btn-secondary" type="button" data-pro data-i18n="exportW3C">W3C Tokens</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

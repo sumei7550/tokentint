@@ -16,7 +16,6 @@
   "extracting": { "message": "正在提取颜色…" },
   "colorsExtracted": { "message": "已提取 $1 个颜色" },
   "extractError": { "message": "提取颜色失败" },
-  "pageExtractionNotSupported": { "message": "当前页面不支持" },
   "copied": { "message": "已复制到剪贴板" },
   "addedToProject": { "message": "已添加到项目" },
   "exported": { "message": "导出成功" },

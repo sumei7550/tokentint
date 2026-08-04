@@ -1,11 +1,11 @@
 import type { Entitlement } from '../types';
 import { setEntitlement, getEntitlement } from './storage';
+import { APP_URLS } from '../config';
 
-const LICENSE_VERIFY_URL = 'https://tokentint.vercel.app/api/license/verify';
 
 export async function activateLicense(activationToken: string): Promise<boolean> {
   try {
-    const response = await fetch(LICENSE_VERIFY_URL, {
+    const response = await fetch(APP_URLS.verifyLicense, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token: activationToken })
@@ -44,8 +44,7 @@ export async function requirePro(): Promise<boolean> {
   const isPro = await checkProStatus();
 
   if (!isPro) {
-    const upgradeUrl = 'https://tokentint.vercel.app/upgrade';
-    chrome.tabs.create({ url: upgradeUrl });
+    chrome.tabs.create({ url: APP_URLS.upgrade });
     return false;
   }
 

@@ -34,7 +34,7 @@ async function handleMessage(message: Message, sender: chrome.runtime.MessageSen
 }
 
 async function handleExtractColors(tabId?: number): Promise<MessageResponse> {
-  if (!tabId) {
+  if (tabId === undefined) {
     return { success: false, error: 'No active webpage is available. Open a webpage and try again.' };
   }
 
@@ -54,7 +54,7 @@ async function handleExtractColors(tabId?: number): Promise<MessageResponse> {
     if (/Cannot access contents of url|extensions gallery|chrome:\/\//i.test(message)) {
       return {
         success: false,
-        error: 'Chrome does not allow color extraction on this page. Try a regular website instead.'
+        error: 'pageExtractionNotSupported'
       };
     }
     return { success: false, error: message };
@@ -62,6 +62,46 @@ async function handleExtractColors(tabId?: number): Promise<MessageResponse> {
 }
 
 function extractColorsFromPage(): string[] {
+  // executeScript serializes only this function into the page context.
+  function normalizeColor(color: string): string | null {
+    color = color.trim().toLowerCase();
+    if (color.startsWith('#')) {
+      if (color.length === 4) return '#' + color[1] + color[1] + color[2] + color[2] + color[3] + color[3];
+      if (color.length === 7) return color;
+    }
+    const rgbMatch = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    return rgbMatch ? rgbToHex(parseInt(rgbMatch[1]), parseInt(rgbMatch[2]), parseInt(rgbMatch[3])) : null;
+  }
+
+  function rgbToHex(r: number, g: number, b: number): string {
+    return '#' + [r, g, b].map(x => {
+      const hex = x.toString(16);
+      return hex.length === 1 ? '0' + hex : hex;
+    }).join('');
+  }
+
+  function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) } : null;
+  }
+
+  function areSimilar(hex1: string, hex2: string): boolean {
+    const rgb1 = hexToRgb(hex1);
+    const rgb2 = hexToRgb(hex2);
+    if (!rgb1 || !rgb2) return false;
+    const distance = Math.sqrt(
+      Math.pow(rgb1.r - rgb2.r, 2) + Math.pow(rgb1.g - rgb2.g, 2) + Math.pow(rgb1.b - rgb2.b, 2)
+    );
+    return distance < 15;
+  }
+
+  function deduplicateSimilarColors(colors: string[]): string[] {
+    const result: string[] = [];
+    for (const color of colors) {
+      if (!result.some(existing => areSimilar(color, existing))) result.push(color);
+    }
+    return result;
+  }
   const colorMap = new Map<string, number>();
   const elements = document.querySelectorAll('*');
 
@@ -128,72 +168,3 @@ function extractColorsFromPage(): string[] {
   return deduplicated.slice(0, 20);
 }
 
-function normalizeColor(color: string): string | null {
-  color = color.trim().toLowerCase();
-
-  if (color.startsWith('#')) {
-    if (color.length === 4) {
-      return '#' + color[1] + color[1] + color[2] + color[2] + color[3] + color[3];
-    }
-    if (color.length === 7) {
-      return color;
-    }
-  }
-
-  const rgbMatch = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-  if (rgbMatch) {
-    const r = parseInt(rgbMatch[1]);
-    const g = parseInt(rgbMatch[2]);
-    const b = parseInt(rgbMatch[3]);
-    return rgbToHex(r, g, b);
-  }
-
-  return null;
-}
-
-function rgbToHex(r: number, g: number, b: number): string {
-  return '#' + [r, g, b].map(x => {
-    const hex = x.toString(16);
-    return hex.length === 1 ? '0' + hex : hex;
-  }).join('');
-}
-
-function deduplicateSimilarColors(colors: string[]): string[] {
-  const result: string[] = [];
-
-  for (const color of colors) {
-    const isSimilar = result.some(existing => {
-      return areSimilar(color, existing);
-    });
-
-    if (!isSimilar) {
-      result.push(color);
-    }
-  }
-
-  return result;
-}
-
-function areSimilar(hex1: string, hex2: string): boolean {
-  const rgb1 = hexToRgb(hex1);
-  const rgb2 = hexToRgb(hex2);
-
-  if (!rgb1 || !rgb2) return false;
-
-  const distance = Math.sqrt(
-    Math.pow(rgb1.r - rgb2.r, 2) +
-    Math.pow(rgb1.g - rgb2.g, 2) +
-    Math.pow(rgb1.b - rgb2.b, 2)
-  );
-
-  return distance < 15;
-}
-
-function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : null;
-}

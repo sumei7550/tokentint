@@ -412,7 +412,15 @@ next start
 ## Environment Variables
 
 ### Extension (build-time)
-None needed (no secrets in extension code)
+The website/API origin is injected at build time, so switching between local and production does not require source edits:
+
+```bash
+cd extension
+npm run build:local       # http://localhost:3000
+npm run build:production  # https://tokentint.vercel.app
+```
+
+`npm run dev` defaults to the local website. Custom origins can be passed with `--env baseUrl=https://example.com`.
 
 ### Website (runtime)
 

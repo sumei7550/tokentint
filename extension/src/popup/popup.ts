@@ -1,4 +1,5 @@
 import './popup.css';
+import { APP_URLS } from '../config';
 import { formatColor, getContrastRatio, meetsWCAG } from '../utils/color';
 import {
   getColorHistory,
@@ -225,7 +226,7 @@ class PopupApp {
 
     // Settings/upgrade
     document.getElementById('upgrade-btn')?.addEventListener('click', () => {
-      chrome.tabs.create({ url: 'https://tokentint.vercel.app/upgrade' });
+      chrome.tabs.create({ url: APP_URLS.upgrade });
     });
 
     // Keyboard shortcuts
@@ -286,7 +287,7 @@ class PopupApp {
 
   private async requireProjectPro(): Promise<boolean> {
     if (this.isPro) return true;
-    chrome.tabs.create({ url: 'https://tokentint.vercel.app/upgrade' });
+    chrome.tabs.create({ url: APP_URLS.upgrade });
     return false;
   }
 
@@ -361,7 +362,7 @@ class PopupApp {
 
   private async extractColors() {
     if (!this.isPro) {
-      chrome.tabs.create({ url: 'https://tokentint.vercel.app/upgrade' });
+      chrome.tabs.create({ url: APP_URLS.upgrade });
       return;
     }
 
@@ -397,7 +398,10 @@ class PopupApp {
         await this.renderHistory();
         this.showToast(chrome.i18n.getMessage('colorsExtracted', [colors.length.toString()]));
       } else {
-        this.showToast(response.error, 'error');
+        const errorMessage = response.error === 'pageExtractionNotSupported'
+          ? chrome.i18n.getMessage('pageExtractionNotSupported')
+          : response.error;
+        this.showToast(errorMessage || chrome.i18n.getMessage('extractError'), 'error');
       }
     } catch (error) {
       this.showToast(chrome.i18n.getMessage('extractError'), 'error');
@@ -453,7 +457,7 @@ class PopupApp {
     if (!this.currentProject) return;
 
     if ((format === 'tailwind' || format === 'w3c') && !this.isPro) {
-      chrome.tabs.create({ url: 'https://tokentint.vercel.app/upgrade' });
+      chrome.tabs.create({ url: APP_URLS.upgrade });
       return;
     }
 
