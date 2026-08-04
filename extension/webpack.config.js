@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 const URLS = {
   local: 'http://localhost:3000',
-  production: 'https://tokentint.vercel.app'
+  production: 'https://www.tokentint.xyz'
 };
 
 module.exports = (env = {}, argv = {}) => {

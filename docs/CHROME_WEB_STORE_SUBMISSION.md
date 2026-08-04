@@ -34,9 +34,9 @@ Suggested category: Productivity
 
 Language: English
 
-Website: https://tokentint.com
-Support URL: https://tokentint.com/support
-Privacy URL: https://tokentint.com/privacy
+Website: https://www.tokentint.xyz
+Support URL: https://www.tokentint.xyz/support
+Privacy URL: https://www.tokentint.xyz/privacy
 
 ## Privacy tab values
 

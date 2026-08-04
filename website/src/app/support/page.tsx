@@ -13,7 +13,7 @@ export default function SupportPage() {
 
             <section style={{ marginBottom: '32px', marginTop: '32px' }}>
               <h2>Need Help?</h2>
-              <p>We're here to help! Contact us at: <a href="mailto:sumei7550@outlook.com">sumei7550@outlook.com</a></p>
+              <p>We're here to help! Contact us at: <a href="mailto:support@tokentint.xyz">support@tokentint.xyz</a></p>
             </section>
 
             <section style={{ marginBottom: '32px' }}>

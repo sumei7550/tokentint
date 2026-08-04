@@ -73,4 +73,4 @@ Proprietary - One-time Pro purchase available
 
 ## Support
 
-Visit https://tokentint.com/support for help.
+Visit https://www.tokentint.xyz/support for help.

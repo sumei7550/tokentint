@@ -77,7 +77,7 @@ export async function createCreemCheckout(email: string): Promise<CreemCheckoutR
   const CREEM_API_KEY = process.env.CREEM_API_KEY as string;
   const CREEM_PRODUCT_ID = process.env.CREEM_PRODUCT_ID as string;
   const CREEM_API_BASE_URL = (process.env.CREEM_API_BASE_URL as string).replace(/\/$/, '');
-  const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://tokentint.vercel.app').replace(/\/$/, '');
+  const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.tokentint.xyz').replace(/\/$/, '');
 
   const endpoint = `${CREEM_API_BASE_URL}/v1/checkouts`;
 

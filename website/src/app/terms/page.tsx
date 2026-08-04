@@ -46,7 +46,7 @@ export default function TermsPage() {
 
             <section style={{ marginBottom: '32px' }}>
               <h2>Contact</h2>
-              <p>For questions about these terms, contact: <a href="mailto:sumei7550@outlook.com">sumei7550@outlook.com</a></p>
+              <p>For questions about these terms, contact: <a href="mailto:support@tokentint.xyz">support@tokentint.xyz</a></p>
             </section>
           </div>
         </div>

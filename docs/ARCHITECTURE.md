@@ -103,7 +103,7 @@ User clicks "Extract"
 **License Activation:**
 ```
 User pastes token
-  → POST to tokentint.com/api/license/verify
+  → POST to https://www.tokentint.xyz/api/license/verify
   → Server verifies token signature
   → Returns { valid: true }
   → Extension saves entitlement locally
@@ -417,7 +417,7 @@ The website/API origin is injected at build time, so switching between local and
 ```bash
 cd extension
 npm run build:local       # http://localhost:3000
-npm run build:production  # https://tokentint.vercel.app
+npm run build:production  # https://www.tokentint.xyz
 ```
 
 `npm run dev` defaults to the local website. Custom origins can be passed with `--env baseUrl=https://example.com`.
@@ -433,7 +433,7 @@ LICENSE_SECRET=<32-byte hex>
 
 # Optional
 NODE_ENV=production
-NEXT_PUBLIC_SITE_URL=https://tokentint.com
+NEXT_PUBLIC_SITE_URL=https://www.tokentint.xyz
 ```
 
 ## Deployment Architecture
@@ -450,8 +450,8 @@ NEXT_PUBLIC_SITE_URL=https://tokentint.com
 - Automatic HTTPS
 
 ### DNS
-- `tokentint.com` → Vercel
-- No subdomain needed (simple setup)
+- `www.tokentint.xyz` → Vercel
+- Canonical `www` host configured
 
 ## Performance Targets
 

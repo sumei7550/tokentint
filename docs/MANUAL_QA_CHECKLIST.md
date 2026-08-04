@@ -188,7 +188,7 @@
 **Test: Upgrade Prompt (Free User)**
 - [ ] Click "Extract Colors" (not activated)
 - [ ] Redirects to upgrade page
-- [ ] URL is correct (tokentint.com/upgrade)
+- [ ] URL is correct (www.tokentint.xyz/upgrade)
 
 **Test: Token Activation**
 - [ ] Get test activation token
@@ -472,7 +472,7 @@
 - [ ] Token is in chrome.storage.local (not accessible from pages)
 
 **Test: HTTPS Only (Website)**
-- [ ] Visit http://tokentint.com
+- [ ] Visit http://www.tokentint.xyz
 - [ ] Redirects to https://
 - [ ] Or shows https:// by default
 

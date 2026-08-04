@@ -18,7 +18,7 @@ export default function RefundsPage() {
 
             <section style={{ marginBottom: '32px' }}>
               <h2>How to Request a Refund</h2>
-              <p>Email <a href="mailto:sumei7550@outlook.com">sumei7550@outlook.com</a> with:</p>
+              <p>Email <a href="mailto:support@tokentint.xyz">support@tokentint.xyz</a> with:</p>
               <ul style={{ marginLeft: '24px', marginTop: '16px' }}>
                 <li>Your email address used for purchase</li>
                 <li>Order ID (if available)</li>
@@ -33,7 +33,7 @@ export default function RefundsPage() {
 
             <section style={{ marginBottom: '32px' }}>
               <h2>Questions?</h2>
-              <p>Contact <a href="mailto:sumei7550@outlook.com">sumei7550@outlook.com</a> for any refund questions.</p>
+              <p>Contact <a href="mailto:support@tokentint.xyz">support@tokentint.xyz</a> for any refund questions.</p>
             </section>
           </div>
         </div>

@@ -75,7 +75,7 @@ CREEM_WEBHOOK_SECRET=whsec_live_your_production_secret_here
 CREEM_PRODUCT_ID=prod_your_product_id_here
 LICENSE_SECRET=your_64_char_hex_secret
 NODE_ENV=production
-NEXT_PUBLIC_SITE_URL=https://tokentint.com
+NEXT_PUBLIC_SITE_URL=https://www.tokentint.xyz
 ```
 
 ## Step 5: Configure Webhook
@@ -83,7 +83,7 @@ NEXT_PUBLIC_SITE_URL=https://tokentint.com
 1. In Creem dashboard, go to **Developers** → **Webhooks**
 2. Click **Add Endpoint**
 3. Fill in:
-   - **URL:** `https://tokentint.com/api/webhook` (or your domain)
+   - **URL:** `https://www.tokentint.xyz/api/webhook` (or your domain)
    - **Events:** Select `checkout.completed`
    - **Version:** Latest
 4. Save

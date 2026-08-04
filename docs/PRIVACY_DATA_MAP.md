@@ -270,9 +270,11 @@ No account = no data on servers to erase
 
 ## Contact for Privacy
 
-**Privacy questions:** privacy@tokentint.com  
-**Data deletion requests:** support@tokentint.com  
-**Privacy policy:** https://tokentint.com/privacy
+**Privacy questions:** support@tokentint.xyz
+
+**Data deletion requests:** support@tokentint.xyz
+
+**Privacy policy:** https://www.tokentint.xyz/privacy
 
 ## Changes to Data Practices
 
