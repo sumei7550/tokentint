@@ -67,7 +67,10 @@ export default function Home() {
                   <li>CSS Variables export</li>
                   <li>Dark/light mode</li>
                 </ul>
-                <Link href="https://chrome.google.com/webstore" className="btn">
+                <Link
+                  href="https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm"
+                  className="btn"
+                >
                   Add to Chrome
                 </Link>
               </div>
