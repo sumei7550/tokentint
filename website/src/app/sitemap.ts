@@ -1,10 +1,10 @@
+// sitemap version 1
 import type { MetadataRoute } from 'next';
 
 const siteUrl = 'https://www.tokentint.xyz';
+const lastModified = new Date('2026-08-14');
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
-
   return [
     {
       url: `${siteUrl}/`,
