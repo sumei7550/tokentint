@@ -91,14 +91,106 @@ body {
 .hero h1 {
   font-size: 56px;
   font-weight: 700;
-  margin-bottom: 24px;
-  line-height: 1.2;
+  margin-bottom: 16px;
+  line-height: 1.15;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero .tagline {
-  font-size: 24px;
+  font-size: 20px;
+  color: var(--primary);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.hero .hero-sub {
+  font-size: 20px;
   color: var(--text-secondary);
-  margin-bottom: 40px;
+  max-width: 720px;
+  margin: 0 auto 40px;
+  line-height: 1.5;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-secondary {
+  display: inline-block;
+  background: transparent;
+  color: var(--text);
+  padding: 16px 32px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  transition: background 0.2s;
+}
+
+.cta-secondary:hover {
+  background: var(--bg-secondary);
+}
+
+.built-for {
+  padding: 80px 0;
+}
+
+.built-for h2 {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.section-lead {
+  text-align: center;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 auto 48px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.audience {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+.audience h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.audience p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.screenshot {
+  margin: 0;
+}
+
+.screenshot img {
+  border-radius: 12px;
+  border: 1px solid var(--border);
 }
 
 .cta-button {
@@ -313,16 +405,21 @@ body {
 
 @media (max-width: 768px) {
   .hero h1 {
-    font-size: 40px;
+    font-size: 36px;
   }
 
   .hero .tagline {
-    font-size: 18px;
+    font-size: 16px;
+  }
+
+  .hero .hero-sub {
+    font-size: 17px;
   }
 
   .features h2,
-  .pricing h2 {
-    font-size: 32px;
+  .pricing h2,
+  .built-for h2 {
+    font-size: 28px;
   }
 
   .nav-links {

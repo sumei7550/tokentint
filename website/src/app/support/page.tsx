@@ -1,5 +1,13 @@
+import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: 'Support',
+  description:
+    'Get help with TokenTint. Activation, license recovery, EyeDropper troubleshooting, and how to contact support.',
+  alternates: { canonical: '/support' },
+};
 
 export default function SupportPage() {
   return (

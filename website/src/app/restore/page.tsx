@@ -1,5 +1,13 @@
+import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: 'Restore Purchase',
+  description: 'Recover your TokenTint Pro activation token.',
+  alternates: { canonical: '/restore' },
+  robots: { index: false, follow: true },
+};
 
 export default function RestorePage() {
   return (

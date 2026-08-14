@@ -1,5 +1,14 @@
+import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description:
+    'TokenTint privacy policy. Local-only storage, no analytics, no tracking. Details on what is collected and how.',
+  alternates: { canonical: '/privacy' },
+  robots: { index: false, follow: true },
+};
 
 export default function PrivacyPage() {
   return (

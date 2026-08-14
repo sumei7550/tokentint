@@ -1,5 +1,14 @@
+import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: 'Refund Policy',
+  description:
+    'TokenTint offers a 30-day money-back guarantee on Pro purchases. How to request a refund.',
+  alternates: { canonical: '/refunds' },
+  robots: { index: false, follow: true },
+};
 
 export default function RefundsPage() {
   return (

@@ -1,5 +1,13 @@
+import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: 'Terms of Service',
+  description: 'TokenTint terms of service and license grant.',
+  alternates: { canonical: '/terms' },
+  robots: { index: false, follow: true },
+};
 
 export default function TermsPage() {
   return (

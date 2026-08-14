@@ -1,6 +1,17 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: 'Pricing — Free and Lifetime Pro',
+  description:
+    'TokenTint is free forever. Unlock Pro features — page color extraction, multiple palettes, Tailwind and W3C design token exports — with a one-time $15 purchase.',
+  alternates: { canonical: '/pricing' },
+};
+
+const chromeStoreUrl =
+  'https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm';
 
 export default function PricingPage() {
   return (
@@ -10,10 +21,14 @@ export default function PricingPage() {
       <main>
         <section className="pricing">
           <div className="container">
-            <h2>Choose Your Plan</h2>
+            <h1>TokenTint Pricing</h1>
+            <p className="section-lead">
+              Free forever. Unlock every Pro feature with a one-time purchase — no
+              subscription, no renewals.
+            </p>
             <div className="pricing-cards">
               <div className="pricing-card">
-                <h3>Free</h3>
+                <h2>Free</h2>
                 <div className="price">$0</div>
                 <ul className="features-list">
                   <li>Pick colors with EyeDropper</li>
@@ -23,16 +38,13 @@ export default function PricingPage() {
                   <li>CSS Variables export</li>
                   <li>Dark/light mode</li>
                 </ul>
-                <Link
-                  href="https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm"
-                  className="btn"
-                >
+                <Link href={chromeStoreUrl} className="btn">
                   Add to Chrome
                 </Link>
               </div>
 
               <div className="pricing-card featured">
-                <h3>Pro</h3>
+                <h2>Pro</h2>
                 <div className="price">
                   $15 <span>one-time</span>
                 </div>
