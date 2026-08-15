@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
+        allow: ['/upgrade?*_rsc=*', '/'],
         disallow: ['/api/', '/upgrade', '/success', '/restore'],
       },
     ],
