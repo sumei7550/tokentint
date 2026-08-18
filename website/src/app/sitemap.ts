@@ -23,5 +23,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.5,
     },
+    ...[
+      'color-picker-chrome-extension',
+      'website-color-picker',
+      'design-token-generator',
+      'tailwind-color-generator',
+    ].map((slug) => ({
+      url: `${siteUrl}/${slug}`,
+      lastModified,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
   ];
 }
