@@ -62,9 +62,12 @@ export function verifyRedirectSignature(searchParams: URLSearchParams): boolean 
     if (key === 'signature' || !value || value === 'null') continue;
     parts.push(`${key}=${value}`);
   }
-  parts.push(`salt=${apiKey}`);
+  parts.sort();
 
-  const expected = crypto.createHash('sha256').update(parts.join('|')).digest('hex');
+  const expected = crypto
+    .createHmac('sha256', apiKey)
+    .update(parts.join('&'))
+    .digest('hex');
   const expectedBuffer = Buffer.from(expected, 'utf8');
   const signatureBuffer = Buffer.from(signature, 'utf8');
   return expectedBuffer.length === signatureBuffer.length &&

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>TokenTint Settings</title></head>
+<body>
+  <div id="app">
+    <header class="settings-page-header"><img src="icons/icon.svg" alt=""><h1>Settings</h1></header>
+    <main>
+      <section class="settings-group"><div class="settings-group-title">Pro License</div>
+        <div class="license-card license-card-free"><div class="license-purchase-section"><strong>Unlock TokenTint Pro</strong><span>Get more power for your design workflow.</span><button class="btn license-upgrade-button" type="button" data-open-url="__UPGRADE__">Upgrade to Pro</button></div><div class="license-activation-section"><span class="license-activation-label">Already have a license?</span><input id="activation-token" type="text" placeholder="Paste your license key here" autocomplete="off"><button id="activate-license-btn" class="btn btn-secondary" type="button">Activate License</button></div></div>
+        <div class="license-card license-card-active"><div class="license-card-heading"><strong>TokenTint Pro</strong><span class="license-active-badge">Active</span></div><span>Your license is active.<br>You have access to all Pro features.</span><button class="settings-outline-button" type="button" data-open-url="__UPGRADE__">Manage License <span>›</span></button></div>
+      </section>
+      <section class="settings-group settings-about-group"><div class="settings-group-title">About</div><div class="about-list"><div class="about-row"><a href="https://www.tokentint.xyz" target="_blank">Website</a><small>tokentint.xyz</small><span class="about-arrow">›</span></div><div class="about-row"><a href="mailto:support@tokentint.xyz">Support</a><small>Get help and contact us</small><span class="about-arrow">›</span></div><div class="about-row"><span>Version</span><small>1.0.0</small></div></div></section>
+    </main>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>

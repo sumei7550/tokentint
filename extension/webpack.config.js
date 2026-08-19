@@ -18,6 +18,7 @@ module.exports = (env = {}, argv = {}) => {
   return {
     entry: {
       popup: './src/popup/popup.ts',
+      options: './src/settings/settings.ts',
       background: './src/background/background.ts'
     },
     output: {
@@ -25,6 +26,9 @@ module.exports = (env = {}, argv = {}) => {
       filename: '[name].js',
       clean: true
     },
+    // Chrome MV3 extension pages and service workers disallow eval-based
+    // source-map wrappers in every build mode.
+    devtool: 'cheap-module-source-map',
     module: {
       rules: [
         {
@@ -49,6 +53,7 @@ module.exports = (env = {}, argv = {}) => {
         patterns: [
           { from: 'public/manifest.json', to: 'manifest.json' },
           { from: 'public/popup.html', to: 'popup.html' },
+          { from: 'public/options.html', to: 'options.html' },
           { from: 'public/icons', to: 'icons' },
           { from: '_locales', to: '_locales' }
         ]

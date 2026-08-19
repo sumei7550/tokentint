@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
+import { cookies } from 'next/headers';
 import { LanguageProvider } from '@/components/LanguageProvider';
 
 const siteUrl = 'https://www.tokentint.xyz';
@@ -63,9 +64,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const savedLocale = cookies().get('tokentint-locale')?.value;
+  const initialLocale = savedLocale === 'zh-CN' ? 'zh-CN' : 'en';
+
   return (
-    <html lang="en">
-      <body><LanguageProvider>{children}</LanguageProvider></body>
+    <html lang={initialLocale}>
+      <body><LanguageProvider initialLocale={initialLocale}>{children}</LanguageProvider></body>
     </html>
   );
 }

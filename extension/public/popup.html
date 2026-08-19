@@ -12,23 +12,34 @@
     }
 
     body {
-      width: 360px;
-      min-height: 400px;
+      width: 390px;
+      min-height: 560px;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
+      background: var(--page);
       color: var(--text);
     }
 
     :root {
+      --page: #f7f7fa;
       --bg: #ffffff;
-      --bg-secondary: #f8f9fa;
-      --text: #10131A;
-      --text-secondary: #6c757d;
-      --border: #e9ecef;
-      --primary: #635BFF;
-      --teal: #22D3C5;
-      --pink: #FF6B9D;
-      --focus: #635BFF;
+      --bg-secondary: #fafaff;
+      --surface: #ffffff;
+      --surface-muted: #fafaff;
+      --text: #182033;
+      --text-secondary: #687386;
+      --muted: #788197;
+      --border: #e5e7eb;
+      --border-strong: #d9dce5;
+      --primary: #6366f1;
+      --primary-dark: #5b4be8;
+      --primary-soft: #f0edff;
+      --focus: #6366f1;
+      --radius-sm: 8px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-shell: 0 10px 28px rgba(17, 24, 39, .08);
+      --shadow-button: 0 8px 18px rgba(99, 102, 241, .18);
+      --shadow-card: 0 3px 10px rgba(30, 34, 55, .04);
     }
 
     [data-theme="dark"] {
@@ -42,29 +53,31 @@
 </head>
 <body>
   <div id="app">
-    <header class="header">
-      <div class="logo">TokenTint</div>
+    <header id="main-header" class="header">
+      <div class="logo"><img src="icons/icon.svg" alt="" />TokenTint</div>
       <div class="header-actions">
-        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle theme">&#9681;</button>
-        <button id="upgrade-btn" class="icon-btn" type="button" data-i18n="upgrade">Upgrade to Pro</button>
+        <button id="pro-header-btn" class="pro-status" type="button" aria-label="TokenTint Pro">Pro</button>
       </div>
     </header>
 
-    <main>
-      <section class="section">
-        <button id="pick-color-btn" class="btn" type="button" data-i18n="pickColor">Pick Color</button>
-        <button id="extract-colors-btn" class="btn btn-secondary" type="button" data-pro data-i18n="extractColors" style="margin-top: 8px">Extract Page Colors</button>
+    <main id="main-view" class="popup-content">
+      <section class="section capture-section">
+        <div class="section-heading">
+          <div>
+            <div class="section-title">Capture</div>
+          </div>
+        </div>
+        <div class="capture-actions">
+          <button id="pick-color-btn" class="btn capture-primary" type="button"><span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="m14.7 4.3 5 5-9.9 9.9-4.2.8.8-4.2 9.9-9.9Zm-7.9 11.5 2.1 2.1M13.2 5.8l5 5"/></svg></span><span><strong data-i18n="pickColor">Pick Color</strong><small>Pick color on page</small></span></button>
+          <button id="extract-colors-btn" class="btn btn-secondary capture-secondary premium-card" type="button" data-pro><span class="capture-title-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M7 10V8a5 5 0 0 1 10 0v2M6 10h12v10H6z"/></svg></span><span><strong>Extract Colors</strong><small>Scan page colors</small></span><span class="inline-pro">Pro</span></button>
+        </div>
       </section>
 
-      <section class="section">
-        <label class="section-title" for="activation-token">Activate Pro</label>
-        <input id="activation-token" type="text" placeholder="Paste activation token" autocomplete="off">
-        <button id="activate-license-btn" class="btn btn-secondary" type="button" style="margin-top: 8px">Activate Token</button>
-      </section>
-
-      <section class="section">
-        <label class="section-title" for="format-selector">Format</label>
-        <div class="format-selector">
+      <section class="section format-section">
+        <div class="section-heading">
+          <div class="section-title">Format</div>
+        </div>
+        <div class="format-selector home-format-control">
           <select id="format-selector" aria-label="Color format">
             <option value="hex">HEX</option>
             <option value="rgb">RGB</option>
@@ -73,32 +86,70 @@
         </div>
       </section>
 
-      <section class="section">
-        <label class="section-title" for="project-selector" data-i18n="project">Project</label>
-        <div class="project-selector">
-          <select id="project-selector" aria-label="Project"></select>
-          <button id="new-project-btn" class="icon-btn" type="button" data-i18n-aria="newProject" aria-label="New project">+</button>
-          <button id="rename-project-btn" class="icon-btn" type="button" data-i18n-aria="renameProject" aria-label="Rename project">&#9998;</button>
-          <button id="delete-project-btn" class="icon-btn" type="button" data-i18n-aria="deleteProject" aria-label="Delete project">&#128465;</button>
+      <section class="section project-section">
+        <div class="section-heading">
+          <div>
+            <div class="section-title" data-i18n="project">Project</div>
+          </div>
         </div>
-        <div id="project-colors"></div>
+        <div class="project-selector project-control-card">
+          <select id="project-selector" aria-label="Project"></select>
+          <button id="new-project-btn" class="icon-btn project-create-action" type="button" data-i18n-aria="newProject" aria-label="New project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          <button id="rename-project-btn" class="icon-btn project-pro-action" type="button" data-i18n-aria="renameProject" aria-label="Rename project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 16.5-.8 3.8 3.8-.8L18.8 7.7a2.1 2.1 0 0 0 0-3l-.5-.5a2.1 2.1 0 0 0-3 0L4 15.7Z"/><path d="m13.8 5.8 4.4 4.4"/></svg></button>
+          <button id="delete-project-btn" class="icon-btn project-pro-action" type="button" data-i18n-aria="deleteProject" aria-label="Delete project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button>
+        </div>
+        <div class="subsection-label">Tokens</div>
+        <div id="project-colors" class="token-list"></div>
       </section>
 
-      <section class="section">
-        <div class="section-title" data-i18n="history">History</div>
-        <div id="color-history"></div>
-        <button id="clear-history" class="btn btn-secondary" type="button" data-i18n="clearHistory">Clear History</button>
+      <section class="section history-section">
+        <div class="section-heading">
+          <div class="section-title" data-i18n="history">History</div>
+          <button id="clear-history" class="text-btn" type="button" data-i18n="clearHistory">Clear</button>
+        </div>
+        <div id="color-history" class="history-list"></div>
       </section>
 
-      <section class="section">
+      <section class="section export-section">
         <div class="section-title" data-i18n="export">Export</div>
         <div class="export-grid">
-          <button id="export-css" class="btn btn-secondary" type="button" data-i18n="exportCSS">CSS Variables</button>
-          <button id="export-tailwind" class="btn btn-secondary" type="button" data-pro data-i18n="exportTailwind">Tailwind Config</button>
-          <button id="export-w3c" class="btn btn-secondary" type="button" data-pro data-i18n="exportW3C">W3C Tokens</button>
+          <button id="export-css" class="btn btn-secondary export-card" type="button"><span class="export-card-icon export-css-icon">{ }</span><span><strong data-i18n="exportCSS">CSS Variables</strong><small>:root { --color }</small></span><span class="export-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 21h14"/></svg></span></button>
+          <button id="export-tailwind" class="btn btn-secondary export-card" type="button" data-pro><span class="export-card-icon export-tailwind-icon">≋</span><span><strong data-i18n="exportTailwind">Tailwind Config</strong><small>theme.extend.colors</small></span><span class="export-lock" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2M6 10h12v10H6z"/></svg></span><span class="inline-pro">Pro</span></button>
+          <button id="export-w3c" class="btn btn-secondary export-card" type="button" data-pro><span class="export-card-icon export-w3c-icon">{ }</span><span><strong data-i18n="exportW3C">W3C Tokens</strong><small>tokens.json</small></span><span class="export-lock" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2M6 10h12v10H6z"/></svg></span><span class="inline-pro">Pro</span></button>
         </div>
       </section>
+
     </main>
+
+    <button id="settings-footer-btn" class="settings-footer" type="button">
+      <span class="settings-footer-icon" aria-hidden="true"><svg class="settings-icon" viewBox="0 0 24 24" focusable="false"><path d="M9.6 4.7 10.4 3h3.2l.8 1.7 1.8 1 1.8-.3 1.6 2.8-1.2 1.4v2.1l1.2 1.4-1.6 2.8-1.8-.3-1.8 1-.8 1.7h-3.2l-.8-1.7-1.8-1-1.8.3-1.6-2.8 1.2-1.4v-2.1L4.4 8.2 6 5.4l1.8.3 1.8-1Z"/><circle cx="12" cy="10.7" r="2.4"/></svg></span><strong>Settings</strong><span class="export-chevron">›</span>
+    </button>
+
+    <main id="settings-view" class="settings-view" hidden>
+      <header class="settings-view-header">
+        <button id="settings-back-btn" class="icon-btn settings-back-btn" type="button" aria-label="Back"><svg class="settings-back-icon" viewBox="0 0 24 24" focusable="false"><path d="M19 12H5M10 7l-5 5 5 5"/></svg></button>
+        <h1>Settings</h1>
+        <span class="settings-header-spacer" aria-hidden="true"></span>
+      </header>
+      <section class="settings-group">
+        <div class="settings-group-title">Pro License</div>
+        <div class="license-card license-card-free"><div class="license-purchase-section"><strong>Unlock TokenTint Pro</strong><span>Get more power for your design workflow.</span><button class="btn license-upgrade-button" type="button" data-open-url="__UPGRADE__">Upgrade to Pro</button></div><div class="license-activation-section"><span class="license-activation-label">Already have a license?</span><input id="activation-token" type="text" placeholder="Paste your license key here" autocomplete="off"><button id="activate-license-btn" class="btn btn-secondary" type="button">Activate License</button></div></div>
+        <div class="license-card license-card-active"><div class="license-card-heading"><strong>TokenTint Pro</strong><span class="license-active-badge">Active</span></div><span>Your license is active.<br>You have access to all Pro features.</span><button class="settings-outline-button" type="button" data-open-url="__UPGRADE__">Manage License <span>›</span></button></div>
+      </section>
+      <section class="settings-group settings-about-group"><div class="settings-group-title">About</div><div class="about-list"><div class="about-row"><a href="https://www.tokentint.xyz" target="_blank">Website</a><small>tokentint.xyz</small><span class="about-arrow">›</span></div><div class="about-row"><a href="mailto:support@tokentint.xyz">Support</a><small>Get help and contact us</small><span class="about-arrow">›</span></div><div class="about-row"><span>Version</span><small>1.0.0</small></div></div></section>
+    </main>
+
+    <div id="upgrade-modal" class="modal" hidden>
+      <div class="modal-backdrop" data-close-modal></div>
+      <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="upgrade-title">
+        <button class="modal-close icon-btn" type="button" aria-label="Close" data-close-modal>×</button>
+        <div class="pro-modal-icon">♛</div>
+        <h2 id="upgrade-title">Unlock TokenTint Pro</h2>
+        <p class="section-description">Extract page colors, manage multiple projects, and export Tailwind or W3C tokens.</p>
+        <button id="modal-upgrade-btn" class="btn" type="button">Upgrade to Pro</button>
+      </section>
+    </div>
+
   </div>
   <script src="popup.js"></script>
 </body>

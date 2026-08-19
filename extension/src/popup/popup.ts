@@ -1,4 +1,5 @@
 import './popup.css';
+import './settings-overrides.css';
 import { APP_URLS } from '../config';
 import { formatColor, getContrastRatio, meetsWCAG } from '../utils/color';
 import {
@@ -56,6 +57,8 @@ class PopupApp {
   private async loadSettings() {
     const settings = await getSettings();
     this.currentFormat = settings.defaultFormat;
+    const formatSelector = document.getElementById('format-selector') as HTMLSelectElement | null;
+    if (formatSelector) formatSelector.value = this.currentFormat;
 
     const theme = settings.theme === 'system'
       ? window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
@@ -71,6 +74,14 @@ class PopupApp {
   }
 
   private updateProUI() {
+    document.body.setAttribute('data-entitlement', this.isPro ? 'pro' : 'free');
+
+    const proHeaderButton = document.getElementById('pro-header-btn');
+    if (proHeaderButton) {
+      proHeaderButton.textContent = this.isPro ? 'Pro' : 'Upgrade';
+      proHeaderButton.setAttribute('aria-label', this.isPro ? 'TokenTint Pro' : 'Upgrade to TokenTint Pro');
+    }
+
     const proElements = document.querySelectorAll('[data-pro]');
     proElements.forEach(el => {
       if (this.isPro) {
@@ -94,7 +105,8 @@ class PopupApp {
     if (!selector) return;
 
     selector.innerHTML = '';
-    projects.forEach(project => {
+    const visibleProjects = this.isPro ? projects : projects.slice(0, 1);
+    visibleProjects.forEach(project => {
       const option = document.createElement('option');
       option.value = project.id;
       option.textContent = project.name;
@@ -113,7 +125,7 @@ class PopupApp {
     if (!container) return;
 
     if (this.currentProject.colors.length === 0) {
-      container.innerHTML = `<div class="empty-state">${chrome.i18n.getMessage('noColors')}</div>`;
+      container.innerHTML = '<div class="empty-state"><span class="empty-state-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4a8 8 0 1 0 0 16h1.5a2 2 0 0 0 0-4H12a2 2 0 1 1 0-4h5.5A2.5 2.5 0 0 0 20 9.5 5.5 5.5 0 0 0 14.5 4H12Z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7.5" r="1"/><circle cx="14" cy="7" r="1"/></svg></span><span class="empty-state-copy"><strong>No tokens yet</strong><span>Pick a color and add it to your project.</span></span></div>';
       return;
     }
 
@@ -153,15 +165,15 @@ class PopupApp {
         </div>
         <div class="color-actions">
           <button class="icon-btn" data-action="copy" aria-label="${chrome.i18n.getMessage('copy')}">
-            <span>📋</span>
+            <span class="history-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="8" y="7" width="10" height="12" rx="1.5"/><path d="M6 16V5.5A1.5 1.5 0 0 1 7.5 4H15"/></svg></span>
           </button>
           ${showRemove ? `
             <button class="icon-btn" data-action="remove" aria-label="${chrome.i18n.getMessage('remove')}">
-              <span>🗑️</span>
+              <span class="history-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></span>
             </button>
           ` : `
             <button class="icon-btn" data-action="add" aria-label="${chrome.i18n.getMessage('addToProject')}">
-              <span>➕</span>
+              <span class="history-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
             </button>
           `}
         </div>
@@ -184,6 +196,14 @@ class PopupApp {
   }
 
   private setupEventListeners() {
+    document.getElementById('pro-header-btn')?.addEventListener('click', () => {
+      if (this.isPro) {
+        this.showSettingsView();
+      } else {
+        chrome.tabs.create({ url: APP_URLS.upgrade });
+      }
+    });
+
     // Pick color button
     document.getElementById('pick-color-btn')?.addEventListener('click', () => {
       this.pickColor();
@@ -192,13 +212,6 @@ class PopupApp {
     // Extract colors button (Pro)
     document.getElementById('extract-colors-btn')?.addEventListener('click', () => {
       this.extractColors();
-    });
-
-    // Format selector
-    document.getElementById('format-selector')?.addEventListener('change', (e) => {
-      this.currentFormat = (e.target as HTMLSelectElement).value as ColorFormat;
-      this.renderHistory();
-      this.renderCurrentProject();
     });
 
     // Export buttons
@@ -219,13 +232,32 @@ class PopupApp {
       this.clearHistory();
     });
 
-    // Theme toggle
-    document.getElementById('theme-toggle')?.addEventListener('click', () => {
-      this.toggleTheme();
+    document.getElementById('settings-footer-btn')?.addEventListener('click', () => {
+      this.showSettingsView();
     });
-
-    // Settings/upgrade
-    document.getElementById('upgrade-btn')?.addEventListener('click', () => {
+    document.getElementById('settings-back-btn')?.addEventListener('click', () => this.hideSettingsView());
+    document.getElementById('format-selector')?.addEventListener('change', async (event) => {
+      this.currentFormat = (event.target as HTMLSelectElement).value as ColorFormat;
+      await updateSettings({ defaultFormat: this.currentFormat });
+      await this.renderCurrentProject();
+      await this.renderHistory();
+    });
+    document.getElementById('settings-format-selector')?.addEventListener('change', async (event) => {
+      this.currentFormat = (event.target as HTMLSelectElement).value as ColorFormat;
+      await updateSettings({ defaultFormat: this.currentFormat });
+      const homeFormat = document.getElementById('format-selector') as HTMLSelectElement | null;
+      if (homeFormat) homeFormat.value = this.currentFormat;
+      await this.renderCurrentProject();
+      await this.renderHistory();
+    });
+    document.getElementById('activate-license-btn')?.addEventListener('click', () => void this.activateLicense());
+    document.querySelectorAll<HTMLElement>('[data-open-url]').forEach((element) => {
+      element.addEventListener('click', () => chrome.tabs.create({ url: APP_URLS.upgrade }));
+    });
+    document.querySelectorAll('[data-close-modal]').forEach(el => el.addEventListener('click', () => {
+      document.getElementById('upgrade-modal')?.setAttribute('hidden', '');
+    }));
+    document.getElementById('modal-upgrade-btn')?.addEventListener('click', () => {
       chrome.tabs.create({ url: APP_URLS.upgrade });
     });
 
@@ -257,9 +289,25 @@ class PopupApp {
       void this.deleteCurrentProject();
     });
 
-    document.getElementById('activate-license-btn')?.addEventListener('click', () => {
-      void this.activateLicense();
-    });
+  }
+
+  private showSettingsView() {
+    const settings = document.getElementById('settings-view');
+    const format = document.getElementById('format-selector') as HTMLSelectElement | null;
+    if (format) format.value = this.currentFormat;
+    const settingsFormat = document.getElementById('settings-format-selector') as HTMLSelectElement | null;
+    if (settingsFormat) settingsFormat.value = this.currentFormat;
+    document.getElementById('main-view')?.setAttribute('hidden', 'true');
+    document.getElementById('main-header')?.setAttribute('hidden', 'true');
+    document.getElementById('settings-footer-btn')?.setAttribute('hidden', 'true');
+    settings?.removeAttribute('hidden');
+  }
+
+  private hideSettingsView() {
+    document.getElementById('settings-view')?.setAttribute('hidden', '');
+    document.getElementById('main-view')?.removeAttribute('hidden');
+    document.getElementById('main-header')?.removeAttribute('hidden');
+    document.getElementById('settings-footer-btn')?.removeAttribute('hidden');
   }
 
   private async activateLicense() {
@@ -287,7 +335,7 @@ class PopupApp {
 
   private async requireProjectPro(): Promise<boolean> {
     if (this.isPro) return true;
-    chrome.tabs.create({ url: APP_URLS.upgrade });
+    document.getElementById('upgrade-modal')?.removeAttribute('hidden');
     return false;
   }
 
@@ -362,7 +410,7 @@ class PopupApp {
 
   private async extractColors() {
     if (!this.isPro) {
-      chrome.tabs.create({ url: APP_URLS.upgrade });
+      document.getElementById('upgrade-modal')?.removeAttribute('hidden');
       return;
     }
 
@@ -457,7 +505,7 @@ class PopupApp {
     if (!this.currentProject) return;
 
     if ((format === 'tailwind' || format === 'w3c') && !this.isPro) {
-      chrome.tabs.create({ url: APP_URLS.upgrade });
+      document.getElementById('upgrade-modal')?.removeAttribute('hidden');
       return;
     }
 
@@ -508,7 +556,8 @@ class PopupApp {
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
     toast.textContent = message;
-    document.body.appendChild(toast);
+    const popupRoot = document.getElementById('app') || document.body;
+    popupRoot.appendChild(toast);
 
     setTimeout(() => {
       toast.classList.add('show');

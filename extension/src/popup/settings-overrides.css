@@ -1,0 +1,154 @@
+.license-card input {
+  outline: none;
+}
+
+.license-card input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-soft);
+}
+
+.license-card .btn.btn-secondary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-weight: 600;
+  box-shadow: none;
+}
+
+/* Final settings-view polish: compact, content-sized, and consistent with the popup shell. */
+.settings-view {
+  min-height: 0;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  background: var(--surface);
+}
+
+.settings-view .settings-view-header {
+  min-height: 42px;
+  margin: 0 -16px 14px;
+  padding: 0 12px;
+  justify-content: flex-start;
+  gap: 5px;
+  background: var(--surface);
+}
+
+.settings-view .settings-view-header h1 {
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1;
+  text-align: left;
+}
+
+.settings-view .settings-back-btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+}
+
+.settings-view .settings-back-icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.8;
+}
+
+.settings-view .settings-group {
+  margin-bottom: 18px;
+}
+
+.settings-view .settings-group-title {
+  margin-bottom: 8px;
+}
+
+.settings-view .license-card {
+  display: grid;
+  gap: 14px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+/* Keep exactly one entitlement state visible. */
+body[data-entitlement="pro"] .settings-view .license-card-free,
+body:not([data-entitlement="pro"]) .settings-view .license-card-active {
+  display: none;
+}
+
+body[data-entitlement="pro"] .settings-view .license-card-active,
+body:not([data-entitlement="pro"]) .settings-view .license-card-free {
+  display: grid;
+}
+
+.settings-view .license-purchase-section,
+.settings-view .license-activation-section {
+  display: grid;
+  gap: 7px;
+}
+
+.settings-view .license-purchase-section strong {
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.settings-view .license-purchase-section > span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.settings-view .license-upgrade-button {
+  min-height: 32px;
+  padding: 6px 10px;
+  background: var(--primary);
+  border: 0;
+  border-radius: var(--r-sm);
+  box-shadow: none;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.settings-view .license-activation-section {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.settings-view .license-activation-label {
+  margin-bottom: 1px;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.settings-view .license-card input {
+  min-height: 38px;
+  padding: 8px 10px;
+}
+
+.settings-view .license-card .btn.btn-secondary {
+  min-height: 32px;
+  padding: 6px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--muted);
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.settings-view .about-list {
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+}
+
+.settings-view .about-row {
+  min-height: 40px;
+  padding: 6px 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 75%, transparent);
+}
+
+.settings-view .about-arrow {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}

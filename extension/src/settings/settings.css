@@ -1,0 +1,52 @@
+body {
+  width: 360px;
+  min-width: 0;
+  min-height: 0;
+  padding: 14px;
+  background: var(--page);
+}
+
+#app { width: 100%; max-width: none; margin: 0; padding: 16px 16px 18px; border: 1px solid var(--border); border-radius: var(--r-lg); background: var(--surface); box-shadow: var(--shadow); }
+.license-card input { border: 1px solid var(--border); outline: none; }
+.license-card input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-soft); }
+.license-card .btn-secondary { background: linear-gradient(135deg, var(--primary-dark), #765cf3); border: 0; color: #fff; font-weight: 700; box-shadow: var(--shadow-button); }
+.settings-page-header { display: flex; align-items: center; gap: 12px; padding-bottom: 22px; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
+.settings-page-header h1 { margin: 0; font-size: 24px; }
+.settings-page-header img { width: 38px; height: 38px; border-radius: 10px; }
+.settings-group { margin-bottom: 26px; }
+.settings-group-title { margin-bottom: 10px; color: var(--text); font-size: 12px; font-weight: 700; letter-spacing: .45px; text-transform: uppercase; }
+.settings-format-control select { width: 100%; padding-right: 28px; }
+.about-list { overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-md); }
+.about-row { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; min-height: 54px; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.about-row:last-child { border-bottom: 0; }
+.about-row a { color: var(--text); text-decoration: none; font-weight: 600; }
+.about-row small { color: var(--text-secondary); }
+.about-arrow { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--muted); }
+.license-card { gap: 12px; padding: 0; border: 0; background: transparent; }
+.license-purchase-section, .license-activation-section { display: grid; gap: 6px; }
+.license-activation-section { padding-top: 12px; border-top: 1px solid var(--border); }
+.license-activation-label { color: var(--text); font-size: 12px; font-weight: 700; }
+.license-card .btn-secondary { background: var(--surface); border: 1px solid var(--primary); color: var(--primary-dark); font-weight: 700; box-shadow: none; }
+.about-row { min-height: 40px; padding: 5px 10px; }
+.about-arrow { font-size: 12px; }
+.settings-page-header h1 { font-size: 21px; }
+.license-purchase-section { padding-bottom: 0; border-bottom: 0; }
+.license-activation-section { padding-top: 12px; border-top: 1px solid color-mix(in srgb, var(--border) 70%, transparent); }
+.license-card-free .license-upgrade-button { min-height: 30px; padding: 6px 10px; background: var(--primary); box-shadow: none; font-size: 12px; }
+.license-activation-section { padding-top: 16px; border-top: 0; }
+.about-row { min-height: 40px; padding: 7px 0; }
+.about-arrow { display: grid; place-items: center; width: 18px; height: 18px; font-size: 17px; line-height: 1; }
+.license-card .btn-secondary { border-color: var(--border); color: var(--muted); font-weight: 600; box-shadow: none; }
+.license-card .btn-secondary:hover { background: var(--primary-soft); border-color: var(--primary); color: var(--primary-dark); }
+.settings-page-header { justify-content: flex-start; gap: 10px; padding-bottom: 14px; margin-bottom: 18px; }
+.settings-group { margin-bottom: 20px; }
+.license-card { gap: 12px; }
+.license-purchase-section { padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.license-activation-section { padding-top: 0; border-top: 0; }
+.about-list { border: 0; border-radius: 0; background: transparent; }
+.about-row { min-height: 38px; padding: 5px 0; border-bottom-color: color-mix(in srgb, var(--border) 65%, transparent); }
+
+.license-card-free .license-upgrade-button,
+.license-card .btn-secondary { cursor: pointer; transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease; }
+.license-card-free .license-upgrade-button:hover { background: var(--primary-dark); box-shadow: var(--primary-shadow); transform: translateY(-1px); }
+.license-card .btn-secondary:hover { background: var(--primary-soft); border-color: var(--primary); color: var(--primary-dark); box-shadow: var(--primary-shadow); }

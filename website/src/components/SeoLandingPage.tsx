@@ -1,4 +1,9 @@
+'use client';
+
 import Link from 'next/link';
+import Navigation from './Navigation';
+import Footer from './Footer';
+import { useLanguage } from './LanguageProvider';
 
 export const chromeStoreUrl =
   'https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm';
@@ -14,13 +19,38 @@ export type SeoLandingPageProps = {
   why: string;
   related: { href: string; label: string }[];
   faqs: { question: string; answer: string }[];
+  visual?: {
+    heroSrc: string;
+    heroAlt: string;
+    showcaseTitle: string;
+  };
 };
 
+function getChineseCopy(props: SeoLandingPageProps): SeoLandingPageProps {
+  const common = {
+    visual: props.visual,
+    related: props.related.map((link) => ({ ...link, label: link.label })),
+  };
+  if (props.h1.includes('Website')) {
+    return { ...props, ...common, h1: '适用于 Chrome 的网站取色器', intro: '直接采集网页界面中的颜色，无需在截图、开发者工具和单独的笔记文件之间来回切换。', problem: '当网站是你的视觉参考时，浏览器取色器只是第一步。手动重建页面调色板既慢，又容易丢失上下文或遗漏辅助颜色。', solution: 'TokenTint 可以直接从页面采集颜色，在一个历史记录中查看，并通过 Pro 页面提取功能快速获得更完整的基础调色板。结果可以导出到 CSS 或令牌文件，而不是留在笔记本里。', workflow: ['打开参考网站，并从 Chrome 启动 TokenTint。', '拾取品牌色、背景色、文字色和强调色，边采集边查看历史记录。', '将调色板保存到项目中，然后导出用于实现或设计系统评审。'], free: ['从当前页面拾取颜色', '复制 HEX、RGB 和 HSL', '20 个颜色历史记录', '单个项目调色板', 'CSS Variables 导出'], pro: ['从页面提取主要颜色', '无限项目调色板', 'Tailwind 配置导出', 'W3C 设计令牌导出', '包含免费版全部功能'], why: '基础取色器回答“这个像素是什么颜色”，而 TokenTint 进一步帮助你回答“如何在项目中使用这个页面的色彩语言”。', related: [{ href: '/color-picker-chrome-extension', label: '查看 Chrome 取色器' }, { href: '/tailwind-color-generator', label: '生成 Tailwind 调色板' }, { href: '/pricing', label: '查看免费版和 Pro 定价' }], faqs: [{ question: '可以从实时网站取色吗？', answer: '可以。TokenTint 专为通过 Chrome 扩展主动采集当前网页颜色而设计。' }, { question: 'TokenTint 可以提取整个网站的调色板吗？', answer: 'Pro 支持提取更多主要颜色，生成更完整的页面调色板；免费版适合逐个主动拾取颜色。' }, { question: '采集颜色后可以做什么？', answer: '你可以复制 HEX、RGB 或 HSL，保存到项目调色板，并使用可用的导出格式进行实现。' }] };
+  }
+  if (props.h1.includes('Design Token')) {
+    return { ...props, ...common, h1: '面向色彩系统的设计令牌生成器', intro: '将视觉参考中的颜色转换为开发者和设计系统团队都能共享的命名值。', problem: '当颜色从浏览器复制到表格、之后再进行命名时，设计令牌很容易变得繁琐。这段手工流程会造成值不一致，也会拖慢设计与代码之间的反馈。', solution: 'TokenTint 提供一个专注的空间来收集颜色、将颜色归入项目调色板，并在准备好正式化系统时导出 CSS Variables 或 W3C Design Tokens。', workflow: ['从实时界面采集颜色，或直接使用已有颜色值。', '检查调色板，并将相关颜色归入同一个项目。', '导出适合开发的格式，再在代码库中完善名称和语义。'], free: ['颜色采集与格式转换', '20 个颜色历史记录', '单个项目调色板', 'CSS Variables 导出'], pro: ['多个项目调色板', 'W3C Design Tokens 导出', '页面颜色提取', 'Tailwind 配置导出', '包含免费版全部功能'], why: '它把设计系统的起点——界面中的真实颜色——连接到团队可以带入代码的导出格式，而不是一个孤立的转换计算器。', related: [{ href: '/color-picker-chrome-extension', label: '从 Chrome 取色器开始' }, { href: '/website-color-picker', label: '采集网站调色板' }, { href: '/tailwind-color-generator', label: '导出 Tailwind 颜色' }], faqs: [{ question: 'TokenTint 可以生成什么？', answer: '免费版支持 CSS Variables 导出，Pro 额外支持 W3C Design Tokens 导出以及项目和页面提取功能。' }, { question: '这是完整的设计令牌管理平台吗？', answer: 'TokenTint 专注于颜色采集和导出步骤，团队可以在现有工作流中继续处理命名、语义和代码库结构。' }, { question: '谁适合使用它？', answer: '需要将界面颜色转换为可复用项目值的前端开发者、UI 设计师和设计系统工程师。' }] };
+  }
+  if (props.h1.includes('Tailwind')) {
+    return { ...props, ...common, h1: '界面颜色 Tailwind 生成器', intro: '将参考网站或产品界面中发现的颜色转换为适合 Tailwind 的调色板，无需重新输入每个值。', problem: 'Tailwind 项目需要一致的命名颜色，但源颜色往往存在于浏览器原型或现有网站中。基础取色器只能复制 HEX，无法帮助你收集、比较并带入配置。', solution: 'TokenTint 让你先采集并整理调色板，之后通过 Pro 导出 Tailwind 配置片段，并与其他项目格式一起使用。', workflow: ['从正在研究的界面采集品牌色、背景色、文字色和强调色。', '将颜色收集到 TokenTint 项目调色板中，并确认各种格式。', '使用 Pro Tailwind 导出作为配置起点，再补充符合代码库约定的语义名称和色阶。'], free: ['EyeDropper 取色', 'HEX、RGB 和 HSL 格式', '20 个颜色历史记录', '单个项目调色板', 'CSS Variables 导出'], pro: ['Tailwind 配置导出', '页面颜色提取', '多个项目调色板', 'W3C Design Tokens 导出', '包含免费版全部功能'], why: '它保留了颜色来源的上下文，并为 Tailwind 用户提供从浏览器参考到实现的直接桥梁，而不是留下一堆没有名称的 HEX 值。', related: [{ href: '/website-color-picker', label: '从网站拾取颜色' }, { href: '/design-token-generator', label: '生成设计令牌' }, { href: '/pricing', label: '比较免费版和 Pro' }], faqs: [{ question: 'TokenTint 可以导出 Tailwind 配置吗？', answer: '可以，Tailwind 配置导出是 Pro 功能。免费版仍支持取色、整理一个调色板和导出 CSS Variables。' }, { question: '可以根据现有网站生成颜色吗？', answer: '可以。你可以从当前页面采集颜色，也可以使用 Pro 页面提取功能生成更完整的基础调色板。' }, { question: '导出会替我完成 Tailwind 的设计决策吗？', answer: '不会。导出结果是一个适合配置的起点，你仍应根据项目约定选择语义名称、色阶和组织方式。' }] };
+  }
+  return { ...props, ...common, h1: '面向开发者的 Chrome 取色器扩展', intro: '一个实用的 Chrome 扩展，用于采集界面颜色，并将颜色带入后续的代码和设计系统工作。', problem: '基础取色器能给你一个颜色，但产品工作通常不会就此结束。你还需要记住来源、比较相关颜色，并将结果转换为项目可以使用的格式。', solution: 'TokenTint 保存 20 个颜色历史记录，支持复制 HEX、RGB 和 HSL，并帮助你从一个像素走向项目调色板和令牌导出。', workflow: ['在查看网页时打开 TokenTint，并启动 EyeDropper。', '采集重要颜色，然后复制当前任务所需的格式。', '将颜色整理到调色板中，准备好后导出 CSS Variables、Tailwind 配置或 W3C 令牌。'], free: ['EyeDropper 取色', 'HEX、RGB 和 HSL 格式', '20 个颜色历史记录', '单个项目调色板', 'CSS Variables 导出'], pro: ['包含免费版全部功能', '页面颜色提取', '多个项目调色板', 'Tailwind 配置导出', 'W3C Design Tokens 导出'], why: '它围绕从视觉参考到可复用项目值的交接流程构建，让你少花时间抄写颜色，多花时间交付一致的界面。', related: [{ href: '/website-color-picker', label: '从网站拾取颜色' }, { href: '/design-token-generator', label: '生成设计令牌' }, { href: '/tailwind-color-generator', label: '创建 Tailwind 颜色' }], faqs: [{ question: 'TokenTint 免费吗？', answer: '是的。核心取色、颜色格式、历史记录、一个项目调色板和 CSS Variables 导出均可免费使用。Pro 是一次性购买，用于解锁高级工作流。' }, { question: 'TokenTint 可以在任何网站上使用吗？', answer: '当你通过扩展主动调用取色功能，并且网页支持浏览器取色工作流时，就可以使用。' }, { question: '它与基础取色器有什么区别？', answer: 'TokenTint 将取色与历史记录、调色板和开发者友好的导出连接起来，而不是只复制一个颜色。' }] };
+}
+
 export default function SeoLandingPage(props: SeoLandingPageProps) {
+  const { locale } = useLanguage();
+  const copy = locale === 'zh-CN' ? getChineseCopy(props) : props;
+  const visual = copy.visual ?? getPageVisual(copy.h1);
   const faqJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: props.faqs.map((faq) => ({
+    mainEntity: copy.faqs.map((faq) => ({
       '@type': 'Question',
       name: faq.question,
       acceptedAnswer: { '@type': 'Answer', text: faq.answer },
@@ -29,43 +59,65 @@ export default function SeoLandingPage(props: SeoLandingPageProps) {
 
   return (
     <>
+      <Navigation />
       <main className="seo-page">
         <section className="seo-hero">
           <div className="container">
-            <p className="eyebrow">TokenTint for frontend workflows</p>
-            <h1>{props.h1}</h1>
-            <p className="seo-intro">{props.intro}</p>
-            <div className="hero-ctas">
-              <a href={chromeStoreUrl} className="cta-button">Add to Chrome — Free</a>
-              <Link href="/pricing" className="cta-secondary">Compare plans</Link>
+            <div className="seo-hero-grid">
+              <div className="seo-hero-copy">
+                <p className="eyebrow">TokenTint for frontend workflows <span>●</span></p>
+                <h1>{copy.h1}</h1>
+                <p className="seo-intro">{copy.intro}</p>
+                <div className="hero-ctas">
+                  <a href={chromeStoreUrl} className="cta-button">{locale === 'zh-CN' ? '添加到 Chrome — 免费' : 'Add to Chrome — Free'}</a>
+                  <Link href="/pricing" className="cta-secondary">{locale === 'zh-CN' ? '比较方案' : 'Compare plans'}</Link>
+                </div>
+                <p className="hero-note"><span>✓</span> {locale === 'zh-CN' ? '永久免费 · 无需信用卡' : 'Free forever · No credit card required'}</p>
+              </div>
+              <ProductVisual visual={visual} />
             </div>
           </div>
         </section>
 
+        <section className="product-strip" id="product"><div className="container"><p className="strip-label">{locale === 'zh-CN' ? '更从容地构建色彩系统' : 'A calmer way to build color systems'}</p><div className="strip-items"><span>01 / {locale === 'zh-CN' ? '采集' : 'Capture'}</span><span>02 / {locale === 'zh-CN' ? '命名' : 'Name'}</span><span>03 / {locale === 'zh-CN' ? '交付' : 'Ship'}</span></div></div></section>
+
         <section className="seo-section"><div className="container seo-copy">
-          <h2>The problem</h2><p>{props.problem}</p>
-          <h2>How TokenTint solves it</h2><p>{props.solution}</p>
+          <h2>{locale === 'zh-CN' ? '问题' : 'The problem'}</h2><p>{copy.problem}</p>
+          <h2>{locale === 'zh-CN' ? 'TokenTint 如何解决' : 'How TokenTint solves it'}</h2><p>{copy.solution}</p>
         </div></section>
 
         <section className="seo-section seo-muted"><div className="container">
-          <h2>How the workflow works</h2>
-          <ol className="workflow-list">{props.workflow.map((step) => <li key={step}>{step}</li>)}</ol>
+          <p className="eyebrow">{locale === 'zh-CN' ? '更顺畅的取色工作流' : 'A better color workflow'}</p><h2>{locale === 'zh-CN' ? '从第一次点击到最终令牌。' : 'From first click to final token.'}</h2>
+          <ol className="workflow-list">{copy.workflow.map((step, index) => <li key={step}><span className="workflow-kicker">0{index + 1} / {locale === 'zh-CN' ? ['拾取', '整理', '导出'][index] : ['Pick', 'Organize', 'Export'][index]}</span><strong>{step.split('. ')[0]}.</strong><span>{step.split('. ').slice(1).join('. ')}</span></li>)}</ol>
         </div></section>
 
-        <section className="seo-section"><div className="container">
-          <h2>Free vs Pro</h2>
-          <div className="seo-columns"><div className="seo-card"><h3>Free</h3><ul>{props.free.map((item) => <li key={item}>{item}</li>)}</ul></div><div className="seo-card seo-card-pro"><h3>Pro</h3><ul>{props.pro.map((item) => <li key={item}>{item}</li>)}</ul></div></div>
-          <p className="seo-copy"><strong>Why TokenTint instead of a basic color picker?</strong> {props.why}</p>
+        <section className="showcase-section"><div className="container"><div className="showcase-heading"><p className="eyebrow">{locale === 'zh-CN' ? '为高效工作而设计' : 'Built for momentum'}</p><h2>{visual.showcaseTitle}</h2></div><div className="showcase-grid"><ShowcaseCard title={locale === 'zh-CN' ? '从浏览器中拾取' : 'Capture from the browser'} label="01" src="/product/popup.png" alt="TokenTint color picker extension" /><ShowcaseCard title={locale === 'zh-CN' ? '按项目整理' : 'Organize by project'} label="02" src="/product/palette.png" alt="TokenTint project palette" /><ShowcaseCard title={locale === 'zh-CN' ? '导出到你的技术栈' : 'Export for your stack'} label="03" src="/product/export.png" alt="TokenTint export formats" /></div></div></section>
+
+        <section className="seo-section seo-pricing-section"><div className="container">
+          <h2>{locale === 'zh-CN' ? '免费版与 Pro' : 'Free vs Pro'}</h2>
+          <div className="seo-columns"><div className="seo-card"><h3>{locale === 'zh-CN' ? '免费版' : 'Free'}</h3><ul>{copy.free.map((item) => <li key={item}>{item}</li>)}</ul></div><div className="seo-card seo-card-pro"><h3>Pro</h3><ul>{copy.pro.map((item) => <li key={item}>{item}</li>)}</ul></div></div>
+          <p className="seo-copy"><strong>{locale === 'zh-CN' ? '为什么选择 TokenTint，而不是基础取色器？' : 'Why TokenTint instead of a basic color picker?'}</strong> {copy.why}</p>
         </div></section>
 
         <section className="seo-section seo-muted"><div className="container faq-section">
-          <h2>Frequently asked questions</h2>
-          {props.faqs.map((faq) => <div className="faq-item" key={faq.question}><h3>{faq.question}</h3><p>{faq.answer}</p></div>)}
+          <h2>{locale === 'zh-CN' ? '常见问题' : 'Frequently asked questions'}</h2>
+          {copy.faqs.map((faq) => <div className="faq-item" key={faq.question}><h3>{faq.question}</h3><p>{faq.answer}</p></div>)}
         </div></section>
 
-        <section className="seo-section"><div className="container seo-related"><h2>Explore TokenTint</h2><div className="related-links">{props.related.map((link) => <Link key={link.href} href={link.href}>{link.label}</Link>)}</div></div></section>
+        <section className="seo-section"><div className="container seo-related"><h2>{locale === 'zh-CN' ? '探索 TokenTint' : 'Explore TokenTint'}</h2><div className="related-links">{copy.related.map((link) => <Link key={link.href} href={link.href}>{link.label}</Link>)}</div></div></section>
       </main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <Footer />
     </>
   );
 }
+
+function getPageVisual(h1: string): NonNullable<SeoLandingPageProps['visual']> {
+  if (h1.toLowerCase().includes('tailwind')) return { heroSrc: '/product/export.png', heroAlt: 'TokenTint Tailwind export', showcaseTitle: 'A faster path to a Tailwind palette.' };
+  if (h1.toLowerCase().includes('design token')) return { heroSrc: '/product/export.png', heroAlt: 'TokenTint design token export', showcaseTitle: 'From sampled colors to usable tokens.' };
+  if (h1.toLowerCase().includes('website')) return { heroSrc: '/product/hero-popup.png', heroAlt: 'TokenTint website color picking workflow', showcaseTitle: 'See the colors behind the interface.' };
+  return { heroSrc: '/product/popup.png', heroAlt: 'TokenTint Chrome extension color picker popup', showcaseTitle: 'A real color workflow, from click to code.' };
+}
+
+function ProductVisual({ visual }: { visual: NonNullable<SeoLandingPageProps['visual']> }) { return <div className="product-mockup"><div className="mockup-glow" /><div className="real-product-visual"><img src={visual.heroSrc} alt={visual.heroAlt} /></div></div> }
+function ShowcaseCard({ title, label, src, alt }: { title: string; label: string; src: string; alt: string }) { const { locale } = useLanguage(); return <article className="showcase-card"><div className="showcase-card-top"><span>{label}</span><span>TokenTint</span></div><div className="showcase-visual real-showcase-visual"><img src={src} alt={alt} /></div><h3>{title}</h3><a href={chromeStoreUrl}>{locale === 'zh-CN' ? '探索工作流' : 'Explore workflow'}</a></article> }
