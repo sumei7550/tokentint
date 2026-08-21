@@ -19,6 +19,8 @@
   "pageExtractionNotSupported": { "message": "当前页面不支持" },
   "copied": { "message": "已复制到剪贴板" },
   "addedToProject": { "message": "已添加到项目" },
+  "colorAlreadyExists": { "message": "颜色已存在于此项目中" },
+  "noTokensToExport": { "message": "没有可导出的令牌" },
   "exported": { "message": "导出成功" },
   "historyCleared": { "message": "历史记录已清除" },
   "confirmClearHistory": { "message": "确定清除全部颜色历史记录吗？" },

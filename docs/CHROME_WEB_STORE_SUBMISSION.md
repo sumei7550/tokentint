@@ -6,7 +6,7 @@ Checked: 2026-08-03
 
 - `extension`: `npm run type-check` passed.
 - `extension`: `npm run build` passed.
-- Upload package: `extension/tokentint-v1.0.0.zip`.
+- Upload package: `extension/tokentint-v1.1.0.zip`.
 - The ZIP contains the contents of `dist`, not the `dist` parent folder.
 - Website build could not be verified in this workspace because `website/node_modules` is not installed (`next` was not found). Deploy the website and verify the URLs before submission.
 
@@ -58,9 +58,9 @@ Privacy URL: https://www.tokentint.xyz/privacy
 
 ## Graphics
 
-- Store icon: `extension/public/icons/icon128.png`
-- Small promotional tile: `extension/store-assets/promotional-tile-440x280.png`
-- Marquee image: `extension/store-assets/promotional-marquee-1400x560.png`
+- Store icon: `website/public/images/icons/icon128.png`
+- Small promotional tile: `store-assets/promotional-tile-440x280.png`
+- Marquee image: `store-assets/promotional-marquee-1400x560.png`
 - Screenshots: capture from the built extension at 1280x800 or 640x400. Do not use generated artwork as a screenshot. Recommended real screenshots: popup/history, picker on a webpage, project palette, CSS export, and Pro extraction.
 
 ## Final blockers before submission

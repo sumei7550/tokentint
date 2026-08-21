@@ -54,7 +54,7 @@
 }
 
 .settings-view .settings-group {
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 }
 
 .settings-view .settings-group-title {
@@ -78,6 +78,46 @@ body:not([data-entitlement="pro"]) .settings-view .license-card-active {
 body[data-entitlement="pro"] .settings-view .license-card-active,
 body:not([data-entitlement="pro"]) .settings-view .license-card-free {
   display: grid;
+}
+
+/* Pro feature indicators mirror the entitlement state used by the popup. */
+body[data-entitlement="pro"] [data-pro] .export-lock,
+body[data-entitlement="pro"] [data-pro] .inline-pro,
+body[data-entitlement="pro"] #extract-colors-btn .capture-lock-icon {
+  display: none;
+}
+
+.capture-feature-icon {
+  display: none !important;
+}
+
+body[data-entitlement="pro"] #extract-colors-btn .capture-feature-icon {
+  display: grid !important;
+}
+
+.export-action-icon {
+  display: grid;
+  flex: 0 0 17px;
+  place-items: center;
+  color: var(--muted);
+}
+
+.export-action-icon svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+body[data-entitlement="pro"] [data-pro] .export-action-icon {
+  display: grid;
+}
+
+body:not([data-entitlement="pro"]) [data-pro] .export-action-icon {
+  display: none;
 }
 
 .settings-view .license-purchase-section,
@@ -133,6 +173,19 @@ body:not([data-entitlement="pro"]) .settings-view .license-card-free {
   color: var(--muted);
   font-weight: 600;
   box-shadow: none;
+}
+
+.settings-view .license-status-details {
+  display: grid;
+  gap: 2px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.settings-view .license-status-details span:first-child {
+  color: var(--text);
+  font-weight: 600;
 }
 
 .settings-view .about-list {

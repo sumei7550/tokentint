@@ -1,10 +1,13 @@
 'use client';
 
-import { useLanguage } from './LanguageProvider';
+import { useLanguage, localizedPath } from './LanguageProvider';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 export default function LanguageToggle() {
   const { locale, setLocale } = useLanguage();
+  const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -17,7 +20,9 @@ export default function LanguageToggle() {
   }, []);
 
   const chooseLocale = (nextLocale: 'en' | 'zh-CN') => {
+    const search = window.location.search;
     setLocale(nextLocale);
+    router.push(`${localizedPath(pathname ?? '/', nextLocale)}${search}`);
     setOpen(false);
   };
 

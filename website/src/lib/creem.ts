@@ -62,11 +62,13 @@ export function verifyRedirectSignature(searchParams: URLSearchParams): boolean 
     if (key === 'signature' || !value || value === 'null') continue;
     parts.push(`${key}=${value}`);
   }
-  parts.sort();
 
+  // Creem signs redirect parameters in their original URL order. The
+  // signature is a plain SHA-256 digest of the canonical string plus the API
+  // key as a salt (not an HMAC over alphabetically sorted parameters).
   const expected = crypto
-    .createHmac('sha256', apiKey)
-    .update(parts.join('&'))
+    .createHash('sha256')
+    .update([...parts, `salt=${apiKey}`].join('|'))
     .digest('hex');
   const expectedBuffer = Buffer.from(expected, 'utf8');
   const signatureBuffer = Buffer.from(signature, 'utf8');
@@ -74,7 +76,7 @@ export function verifyRedirectSignature(searchParams: URLSearchParams): boolean 
     crypto.timingSafeEqual(expectedBuffer, signatureBuffer);
 }
 
-export async function createCreemCheckout(email: string): Promise<CreemCheckoutResponse> {
+export async function createCreemCheckout(email: string, locale: 'en' | 'zh-CN' = 'en'): Promise<CreemCheckoutResponse> {
   assertCreemEnv();
 
   const CREEM_API_KEY = process.env.CREEM_API_KEY as string;
@@ -87,7 +89,7 @@ export async function createCreemCheckout(email: string): Promise<CreemCheckoutR
   const body = {
     product_id: CREEM_PRODUCT_ID,
     customer: { email },
-    success_url: `${SITE_URL}/success`,
+    success_url: `${SITE_URL}${locale === 'zh-CN' ? '/zh-CN' : ''}/success`,
     metadata: { product: 'tokentint-pro' },
   };
 

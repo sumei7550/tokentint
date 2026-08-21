@@ -19,7 +19,7 @@ npm run build
 
 ```bash
 cd dist
-zip -r ../tokentint-v1.0.0.zip .
+zip -r ../tokentint-v1.1.0.zip .
 ```
 
 ## Structure

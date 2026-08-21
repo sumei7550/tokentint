@@ -23,6 +23,7 @@ body {
 .about-row small { color: var(--text-secondary); }
 .about-arrow { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--muted); }
 .license-card { gap: 12px; padding: 0; border: 0; background: transparent; }
+.license-active-badge { display: inline-flex; align-items: center; gap: 3px; padding: 4px 7px; border-radius: 999px; background: #e8f7ef; color: #279565; font-size: 10px; font-weight: 650; line-height: 1; }
 .license-purchase-section, .license-activation-section { display: grid; gap: 6px; }
 .license-activation-section { padding-top: 12px; border-top: 1px solid var(--border); }
 .license-activation-label { color: var(--text); font-size: 12px; font-weight: 700; }
@@ -37,9 +38,11 @@ body {
 .about-row { min-height: 40px; padding: 7px 0; }
 .about-arrow { display: grid; place-items: center; width: 18px; height: 18px; font-size: 17px; line-height: 1; }
 .license-card .btn-secondary { border-color: var(--border); color: var(--muted); font-weight: 600; box-shadow: none; }
+.license-status-details { display: grid; gap: 2px; color: var(--text-secondary); font-size: 12px; line-height: 1.35; }
+.license-status-details span:first-child { color: var(--text); font-weight: 600; }
 .license-card .btn-secondary:hover { background: var(--primary-soft); border-color: var(--primary); color: var(--primary-dark); }
 .settings-page-header { justify-content: flex-start; gap: 10px; padding-bottom: 14px; margin-bottom: 18px; }
-.settings-group { margin-bottom: 20px; }
+.settings-group { margin-bottom: 12px; }
 .license-card { gap: 12px; }
 .license-purchase-section { padding-bottom: 12px; border-bottom: 1px solid var(--border); }
 .license-activation-section { padding-top: 0; border-top: 0; }

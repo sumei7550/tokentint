@@ -26,17 +26,16 @@ export async function POST(request: NextRequest) {
     }
 
     const customerId = event.object?.customer?.id;
-    const customerEmail = event.object?.customer?.email;
     const orderId = event.object?.order?.id;
     const productId = event.object?.product?.id;
 
     if (!customerId || !orderId || productId !== process.env.CREEM_PRODUCT_ID) {
-      console.error('Invalid checkout.completed payload', { customerId, orderId, productId });
+      console.error('Invalid checkout.completed webhook event');
       return NextResponse.json({ error: 'Invalid checkout payload' }, { status: 400 });
     }
 
     const token = generateActivationToken(customerId, orderId);
-    console.log('TokenTint activation token issued', { customerEmail, customerId, orderId, token });
+    console.log('TokenTint activation token issued');
 
     return NextResponse.json({ received: true });
   } catch (error) {

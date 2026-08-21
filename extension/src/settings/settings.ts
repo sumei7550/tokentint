@@ -16,6 +16,7 @@ class SettingsPage {
 
     const entitlement = await getEntitlement();
     document.body.setAttribute('data-entitlement', entitlement.isPro ? 'pro' : 'free');
+    this.renderActivatedDate(entitlement.activatedAt);
     this.setupListeners();
   }
 
@@ -40,7 +41,18 @@ class SettingsPage {
     const response = await chrome.runtime.sendMessage({ type: 'ACTIVATE_LICENSE', payload: { token } });
     if (response.success) {
       document.body.setAttribute('data-entitlement', 'pro');
+      const entitlement = await getEntitlement();
+      this.renderActivatedDate(entitlement.activatedAt);
       input.value = '';
+    }
+  }
+
+  private renderActivatedDate(activatedAt?: number) {
+    const date = document.getElementById('license-activated-date');
+    if (date && activatedAt) {
+      date.textContent = new Intl.DateTimeFormat('en-US', {
+        month: 'short', day: 'numeric', year: 'numeric'
+      }).format(activatedAt);
     }
   }
 }

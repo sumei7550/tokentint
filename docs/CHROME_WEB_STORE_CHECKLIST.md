@@ -22,7 +22,7 @@ Verify `extension/dist/` contains:
 Package the *contents* of `dist`, not its parent directory:
 
 ```powershell
-Compress-Archive -Path extension\dist\* -DestinationPath tokentint-v1.0.0.zip
+Compress-Archive -Path extension\dist\* -DestinationPath tokentint-v1.1.0.zip
 ```
 
 ## 2. Manual QA
@@ -46,8 +46,8 @@ Compress-Archive -Path extension\dist\* -DestinationPath tokentint-v1.0.0.zip
 
 ### Icons
 
-- [x] 16 px, 48 px, and 128 px icons are present in `extension/public/icons/`.
-- [x] Transparent logo master: `extension/assets/tokentint-logo.png`.
+- [x] 16 px, 48 px, and 128 px icons are present in `website/public/images/icons/`.
+- [x] Transparent logo master: `website/public/images/brand/tokentint-logo.png`.
 - [ ] Visually approve the 16 px toolbar icon in Chrome.
 
 ### Screenshots
@@ -65,8 +65,8 @@ Do not use generated artwork as a screenshot.
 
 ### Optional promotional artwork
 
-- [x] 440×280 tile: `extension/store-assets/promotional-tile-440x280.png`
-- [x] 1400×560 marquee: `extension/store-assets/promotional-marquee-1400x560.png`
+- [x] 440×280 tile: `store-assets/promotional-tile-440x280.png`
+- [x] 1400×560 marquee: `store-assets/promotional-marquee-1400x560.png`
 
 ## 4. Accurate listing copy
 

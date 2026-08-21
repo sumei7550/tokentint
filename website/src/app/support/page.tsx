@@ -34,7 +34,7 @@ export default function SupportPage() {
               <div style={{ marginTop: '24px' }}>
                 <h3>{zh ? '我丢失了激活令牌' : 'I lost my activation token'}</h3>
                 <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>
-                  {zh ? '激活令牌会显示在支付成功页面。如果丢失，请提供 Creem 订单号并联系支持。' : 'Your activation token is shown on the payment-success page. If you lost it, contact support with your Creem order ID.'}
+                  {zh ? '激活令牌会显示在支付成功页面。如果丢失，请提供购买邮箱和 Creem 订单号，并联系支持协助恢复。' : 'Your activation token is shown on the payment-success page. If you lost it, contact support with your purchase email and Creem order ID.'}
                 </p>
               </div>
 
@@ -48,7 +48,7 @@ export default function SupportPage() {
               <div style={{ marginTop: '24px' }}>
                 <h3>{zh ? '可以在多台设备上使用 Pro 吗？' : 'Can I use Pro on multiple devices?'}</h3>
                 <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>
-                  {zh ? '可以！你可以在所有设备上使用同一个激活令牌。' : 'Yes! Use the same activation token on all your devices.'}
+                  {zh ? '可以。你可以在本人使用的设备上激活 Pro。' : 'Yes. Use your activation token on your own devices.'}
                 </p>
               </div>
 

@@ -3,7 +3,7 @@ import { createCreemCheckout, CreemApiError } from '@/lib/creem';
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json();
+    const { email, locale } = await request.json();
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json(
@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const checkout = await createCreemCheckout(email);
+    const checkout = await createCreemCheckout(email, locale === 'zh-CN' ? 'zh-CN' : 'en');
     const checkoutUrl = checkout.checkout_url || checkout.url;
 
     if (!checkoutUrl) {

@@ -1,6 +1,6 @@
 {
   "name": "tokentint-extension",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Pick colors. Ship tokens.",
   "private": true,
   "scripts": {

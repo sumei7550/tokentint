@@ -59,6 +59,12 @@
     "addedToProject":  {
                            "message":  "Added to project"
                        },
+    "colorAlreadyExists":  {
+                               "message":  "Color already exists in this project"
+                           },
+    "noTokensToExport":  {
+                             "message":  "No tokens to export"
+                         },
     "exported":  {
                      "message":  "Exported successfully"
                  },

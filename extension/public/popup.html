@@ -54,7 +54,7 @@
 <body>
   <div id="app">
     <header id="main-header" class="header">
-      <div class="logo"><img src="icons/icon.svg" alt="" />TokenTint</div>
+      <div class="logo"><img src="icons/icon128.png" alt="" />TokenTint</div>
       <div class="header-actions">
         <button id="pro-header-btn" class="pro-status" type="button" aria-label="TokenTint Pro">Pro</button>
       </div>
@@ -69,7 +69,7 @@
         </div>
         <div class="capture-actions">
           <button id="pick-color-btn" class="btn capture-primary" type="button"><span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="m14.7 4.3 5 5-9.9 9.9-4.2.8.8-4.2 9.9-9.9Zm-7.9 11.5 2.1 2.1M13.2 5.8l5 5"/></svg></span><span><strong data-i18n="pickColor">Pick Color</strong><small>Pick color on page</small></span></button>
-          <button id="extract-colors-btn" class="btn btn-secondary capture-secondary premium-card" type="button" data-pro><span class="capture-title-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M7 10V8a5 5 0 0 1 10 0v2M6 10h12v10H6z"/></svg></span><span><strong>Extract Colors</strong><small>Scan page colors</small></span><span class="inline-pro">Pro</span></button>
+          <button id="extract-colors-btn" class="btn btn-secondary capture-secondary premium-card" type="button" data-pro><span class="capture-title-icon capture-lock-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M7 10V8a5 5 0 0 1 10 0v2M6 10h12v10H6z"/></svg></span><span class="capture-title-icon capture-feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><circle cx="8" cy="8" r="2.5"/><circle cx="16" cy="8" r="2.5"/><circle cx="8" cy="16" r="2.5"/><circle cx="16" cy="16" r="2.5"/></svg></span><span><strong>Extract Colors</strong><small>Scan page colors</small></span><span class="inline-pro">Pro</span></button>
         </div>
       </section>
 
@@ -98,13 +98,13 @@
           <button id="rename-project-btn" class="icon-btn project-pro-action" type="button" data-i18n-aria="renameProject" aria-label="Rename project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 16.5-.8 3.8 3.8-.8L18.8 7.7a2.1 2.1 0 0 0 0-3l-.5-.5a2.1 2.1 0 0 0-3 0L4 15.7Z"/><path d="m13.8 5.8 4.4 4.4"/></svg></button>
           <button id="delete-project-btn" class="icon-btn project-pro-action" type="button" data-i18n-aria="deleteProject" aria-label="Delete project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button>
         </div>
-        <div class="subsection-label">Tokens</div>
+        <div class="subsection-label">Tokens <span id="token-count" class="section-count" aria-live="polite">0</span></div>
         <div id="project-colors" class="token-list"></div>
       </section>
 
       <section class="section history-section">
         <div class="section-heading">
-          <div class="section-title" data-i18n="history">History</div>
+          <div class="section-title"><span data-i18n="history">History</span> <span id="history-count" class="section-count" aria-live="polite">0</span></div>
           <button id="clear-history" class="text-btn" type="button" data-i18n="clearHistory">Clear</button>
         </div>
         <div id="color-history" class="history-list"></div>
@@ -114,8 +114,8 @@
         <div class="section-title" data-i18n="export">Export</div>
         <div class="export-grid">
           <button id="export-css" class="btn btn-secondary export-card" type="button"><span class="export-card-icon export-css-icon">{ }</span><span><strong data-i18n="exportCSS">CSS Variables</strong><small>:root { --color }</small></span><span class="export-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 21h14"/></svg></span></button>
-          <button id="export-tailwind" class="btn btn-secondary export-card" type="button" data-pro><span class="export-card-icon export-tailwind-icon">≋</span><span><strong data-i18n="exportTailwind">Tailwind Config</strong><small>theme.extend.colors</small></span><span class="export-lock" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2M6 10h12v10H6z"/></svg></span><span class="inline-pro">Pro</span></button>
-          <button id="export-w3c" class="btn btn-secondary export-card" type="button" data-pro><span class="export-card-icon export-w3c-icon">{ }</span><span><strong data-i18n="exportW3C">W3C Tokens</strong><small>tokens.json</small></span><span class="export-lock" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2M6 10h12v10H6z"/></svg></span><span class="inline-pro">Pro</span></button>
+          <button id="export-tailwind" class="btn btn-secondary export-card" type="button" data-pro><span class="export-card-icon export-tailwind-icon">≋</span><span><strong data-i18n="exportTailwind">Tailwind Config</strong><small>theme.extend.colors</small></span><span class="export-lock" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2M6 10h12v10H6z"/></svg></span><span class="export-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 21h14"/></svg></span><span class="inline-pro">Pro</span></button>
+          <button id="export-w3c" class="btn btn-secondary export-card" type="button" data-pro><span class="export-card-icon export-w3c-icon">{ }</span><span><strong data-i18n="exportW3C">W3C Tokens</strong><small>tokens.json</small></span><span class="export-lock" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2M6 10h12v10H6z"/></svg></span><span class="export-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 21h14"/></svg></span><span class="inline-pro">Pro</span></button>
         </div>
       </section>
 
@@ -132,11 +132,11 @@
         <span class="settings-header-spacer" aria-hidden="true"></span>
       </header>
       <section class="settings-group">
-        <div class="settings-group-title">Pro License</div>
+        <div class="settings-group-title">PRO LICENSE</div>
         <div class="license-card license-card-free"><div class="license-purchase-section"><strong>Unlock TokenTint Pro</strong><span>Get more power for your design workflow.</span><button class="btn license-upgrade-button" type="button" data-open-url="__UPGRADE__">Upgrade to Pro</button></div><div class="license-activation-section"><span class="license-activation-label">Already have a license?</span><input id="activation-token" type="text" placeholder="Paste your license key here" autocomplete="off"><button id="activate-license-btn" class="btn btn-secondary" type="button">Activate License</button></div></div>
-        <div class="license-card license-card-active"><div class="license-card-heading"><strong>TokenTint Pro</strong><span class="license-active-badge">Active</span></div><span>Your license is active.<br>You have access to all Pro features.</span><button class="settings-outline-button" type="button" data-open-url="__UPGRADE__">Manage License <span>›</span></button></div>
+        <div class="license-card license-card-active"><div class="license-card-heading"><strong>TokenTint Pro</strong><span class="license-active-badge">✓ Active</span></div><div class="license-status-details"><span>Activated on</span><span id="license-activated-date">Aug 19, 2026</span></div></div>
       </section>
-      <section class="settings-group settings-about-group"><div class="settings-group-title">About</div><div class="about-list"><div class="about-row"><a href="https://www.tokentint.xyz" target="_blank">Website</a><small>tokentint.xyz</small><span class="about-arrow">›</span></div><div class="about-row"><a href="mailto:support@tokentint.xyz">Support</a><small>Get help and contact us</small><span class="about-arrow">›</span></div><div class="about-row"><span>Version</span><small>1.0.0</small></div></div></section>
+      <section class="settings-group settings-about-group"><div class="settings-group-title">About</div><div class="about-list"><div class="about-row"><a href="https://www.tokentint.xyz" target="_blank">Website</a><small>tokentint.xyz</small><span class="about-arrow">›</span></div><div class="about-row"><a href="mailto:support@tokentint.xyz">Support</a><small>Get help and contact us</small><span class="about-arrow">›</span></div><div class="about-row"><span>Version</span><small>1.1.0</small></div></div></section>
     </main>
 
     <div id="upgrade-modal" class="modal" hidden>

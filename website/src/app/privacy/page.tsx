@@ -25,7 +25,7 @@ export default function PrivacyPage() {
               <ul style={{ marginLeft: '24px', marginTop: '16px' }}>
                 <li>{zh ? '邮箱地址（仅用于 Pro 购买）' : 'Email address (only for Pro purchases)'}</li>
                 <li>{zh ? '支付信息（由 Creem 处理，我们不保存）' : 'Payment information (processed by Creem, not stored by us)'}</li>
-                <li>{zh ? '仅在激活或恢复 Pro 许可时提供的激活令牌或购买邮箱' : 'Activation token or purchase email only when you activate or restore a Pro license'}</li>
+                <li>{zh ? '仅在激活或恢复 Pro 许可时提供的激活令牌、购买邮箱和 Creem 订单号' : 'Activation token, purchase email, and Creem order ID only when you activate or restore a Pro license'}</li>
               </ul>
             </section>
 
@@ -50,7 +50,7 @@ export default function PrivacyPage() {
               <ul style={{ marginLeft: '24px', marginTop: '16px' }}>
                 <li>{zh ? '激活 Pro 许可' : 'Activate your Pro license'}</li>
                 <li>{zh ? '验证激活令牌' : 'Verify an activation token'}</li>
-                <li>{zh ? '使用你提供的邮箱恢复购买' : 'Restore a purchase using the email address you provide'}</li>
+                <li>{zh ? '使用你提供的购买邮箱和 Creem 订单号，由支持协助恢复购买' : 'Restore a purchase with the purchase email and Creem order ID you provide, with help from support'}</li>
               </ul>
               <p style={{ marginTop: '16px' }}>{zh ? '免费功能完全支持离线使用。' : 'Free features work completely offline.'}</p>
             </section>

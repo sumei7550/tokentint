@@ -1,10 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { useLanguage } from './LanguageProvider';
+import { useLanguage, localizedPath } from './LanguageProvider';
 
 export default function Footer() {
   const { locale } = useLanguage();
+  const path = (href: string) => localizedPath(href, locale);
   const copy = locale === 'zh-CN'
     ? {
       description: '拾取颜色。构建调色板。交付设计令牌。', product: '产品', extension: 'Chrome 扩展', pricing: '定价', upgrade: '升级',
@@ -20,16 +21,16 @@ export default function Footer() {
       <div className="container">
         <div className="footer-main">
           <div className="footer-brand">
-            <Link href="/" className="footer-logo" aria-label="TokenTint home">
-              <img className="logo-mark" src="/icon.svg" alt="" />
+            <Link href={path('/')} className="footer-logo" aria-label="TokenTint home">
+            <img className="logo-mark" src="/images/brand/icon.png" alt="" />
               <span>TokenTint</span>
             </Link>
             <p>{copy.description}</p>
           </div>
           <div className="footer-columns">
-            <div className="footer-column"><h2>{copy.product}</h2><Link href={chromeStoreUrl}>{copy.extension}</Link><Link href="/pricing">{copy.pricing}</Link><Link href="/upgrade">{copy.upgrade}</Link></div>
-            <div className="footer-column"><h2>{copy.resources}</h2><Link href="/support">{copy.support}</Link><Link href="/faq">{copy.faq}</Link><a href="mailto:support@tokentint.xyz">{copy.contact}</a></div>
-            <div className="footer-column"><h2>{copy.legal}</h2><Link href="/privacy">{copy.privacy}</Link><Link href="/terms">{copy.terms}</Link><Link href="/refunds">{copy.refunds}</Link></div>
+            <div className="footer-column"><h2>{copy.product}</h2><Link href={chromeStoreUrl}>{copy.extension}</Link><Link href={path('/pricing')}>{copy.pricing}</Link><Link href={path('/upgrade')}>{copy.upgrade}</Link></div>
+            <div className="footer-column"><h2>{copy.resources}</h2><Link href={path('/support')}>{copy.support}</Link><Link href={path('/faq')}>{copy.faq}</Link><a href="mailto:support@tokentint.xyz">{copy.contact}</a></div>
+            <div className="footer-column"><h2>{copy.legal}</h2><Link href={path('/privacy')}>{copy.privacy}</Link><Link href={path('/terms')}>{copy.terms}</Link><Link href={path('/refunds')}>{copy.refunds}</Link></div>
           </div>
         </div>
         <div className="footer-bottom"><p>&copy; 2026 TokenTint. {copy.rights}</p></div>

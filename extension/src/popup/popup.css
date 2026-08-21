@@ -53,6 +53,9 @@
 .settings-group-title{margin-bottom:8px}
 .export-action-icon{display:grid;flex:0 0 18px;place-items:center;color:var(--muted)}.export-action-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8}
 
+/* Active license status: compact, soft success treatment. */
+.settings-view .license-active-badge{display:inline-flex;align-items:center;gap:3px;padding:4px 7px;border-radius:999px;background:#e8f7ef;color:#279565;font-size:10px;font-weight:650;line-height:1}
+
 /* Interactive feedback: preserve layout while making clickable controls discoverable. */
 .pro-status,
 .capture-actions .btn,
@@ -67,6 +70,7 @@
 .settings-view .license-card .btn.btn-secondary:hover{background:var(--primary-soft);border-color:var(--primary);color:var(--primary-dark);box-shadow:var(--primary-shadow)}
 
 /* Compact spacing refinements for the project, token, and history sections. */
+.section-count{color:var(--muted);font:inherit;letter-spacing:inherit}
 .project-selector{gap:4px}.project-selector .icon-btn{flex-basis:30px;width:30px;padding:0 1px}
 .project-selector select{min-height:38px;padding:7px 10px}
 .project-selector .icon-btn{flex-basis:29px;width:29px;height:38px;min-height:38px}
@@ -124,3 +128,5 @@
 }
 .settings-view .about-row a{cursor:pointer}
 .settings-view .about-row:hover{background:color-mix(in srgb, var(--primary-soft) 45%, var(--surface))}
+/* Keep feedback visible in the popup viewport while its content scrolls. */
+.toast{position:fixed;bottom:16px}

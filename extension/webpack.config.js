@@ -49,12 +49,15 @@ module.exports = (env = {}, argv = {}) => {
       new webpack.DefinePlugin({
         __TOKENTINT_APP_BASE_URL__: JSON.stringify(appBaseUrl)
       }),
+      new webpack.BannerPlugin({
+        banner: `TokenTint build target: ${target} | ${appBaseUrl} | ${new Date().toISOString()}`
+      }),
       new CopyPlugin({
         patterns: [
           { from: 'public/manifest.json', to: 'manifest.json' },
           { from: 'public/popup.html', to: 'popup.html' },
           { from: 'public/options.html', to: 'options.html' },
-          { from: 'public/icons', to: 'icons' },
+          { from: '../website/public/images/icons', to: 'icons' },
           { from: '_locales', to: '_locales' }
         ]
       })

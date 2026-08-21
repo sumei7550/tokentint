@@ -18,7 +18,10 @@ export default function UpgradePage() {
     continue: '继续支付',
     secure: '由 Creem 提供安全支付服务',
     genericError: '发生错误，请重试。',
-    checkoutError: '无法创建支付会话'
+    checkoutError: '无法创建支付会话',
+    emailRequired: '请输入电子邮箱地址。',
+    emailInvalid: '请输入有效的电子邮箱地址。',
+    emailPlaceholder: '请输入电子邮箱地址'
   } : {
     title: 'Upgrade to Pro',
     description: 'Get lifetime access to all Pro features for a one-time payment of $15.',
@@ -27,19 +30,33 @@ export default function UpgradePage() {
     continue: 'Continue to Payment',
     secure: 'Secure payment powered by Creem',
     genericError: 'Something went wrong. Please try again.',
-    checkoutError: 'Failed to create checkout session'
+    checkoutError: 'Failed to create checkout session',
+    emailRequired: 'Please enter your email address.',
+    emailInvalid: 'Please enter a valid email address.',
+    emailPlaceholder: 'your@email.com'
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError('');
+
+    if (!email.trim()) {
+      setError(copy.emailRequired);
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError(copy.emailInvalid);
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, locale })
       });
 
       const data = await response.json();
@@ -73,7 +90,7 @@ export default function UpgradePage() {
               {copy.description}
             </p>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} noValidate>
               <div className="form-group">
                 <label htmlFor="email">{copy.email}</label>
                 <input
@@ -81,7 +98,7 @@ export default function UpgradePage() {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
+                  placeholder={copy.emailPlaceholder}
                   required
                   disabled={loading}
                 />

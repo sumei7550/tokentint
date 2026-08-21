@@ -44,6 +44,7 @@ class PopupApp {
   private currentProject: Project | null = null;
   private currentFormat: ColorFormat = 'hex';
   private isPro: boolean = false;
+  private activatedAt?: number;
 
   async init() {
     await this.loadSettings();
@@ -70,11 +71,19 @@ class PopupApp {
   private async loadEntitlement() {
     const entitlement = await getEntitlement();
     this.isPro = entitlement.isPro;
+    this.activatedAt = entitlement.activatedAt;
     this.updateProUI();
   }
 
   private updateProUI() {
     document.body.setAttribute('data-entitlement', this.isPro ? 'pro' : 'free');
+
+    const activatedDate = document.getElementById('license-activated-date');
+    if (activatedDate && this.activatedAt) {
+      activatedDate.textContent = new Intl.DateTimeFormat('en-US', {
+        month: 'short', day: 'numeric', year: 'numeric'
+      }).format(this.activatedAt);
+    }
 
     const proHeaderButton = document.getElementById('pro-header-btn');
     if (proHeaderButton) {
@@ -121,6 +130,9 @@ class PopupApp {
   private renderCurrentProject() {
     if (!this.currentProject) return;
 
+    const tokenCount = document.getElementById('token-count');
+    if (tokenCount) tokenCount.textContent = this.currentProject.colors.length.toString();
+
     const container = document.getElementById('project-colors');
     if (!container) return;
 
@@ -138,6 +150,9 @@ class PopupApp {
 
   private async renderHistory() {
     const history = await getColorHistory();
+    const historyCount = document.getElementById('history-count');
+    if (historyCount) historyCount.textContent = history.length.toString();
+
     const container = document.getElementById('color-history');
     if (!container) return;
 
@@ -324,7 +339,9 @@ class PopupApp {
     });
 
     if (response.success) {
-      this.isPro = true;
+      const entitlement = await getEntitlement();
+      this.isPro = entitlement.isPro;
+      this.activatedAt = entitlement.activatedAt;
       this.updateProUI();
       this.showToast('TokenTint Pro activated.');
       if (input) input.value = '';
@@ -497,12 +514,19 @@ class PopupApp {
         await saveProject(this.currentProject);
         this.renderCurrentProject();
         this.showToast(chrome.i18n.getMessage('addedToProject'));
+      } else {
+        this.showToast(chrome.i18n.getMessage('colorAlreadyExists'), 'error');
       }
     }
   }
 
   private async exportAs(format: 'css' | 'tailwind' | 'w3c') {
     if (!this.currentProject) return;
+
+    if (this.currentProject.colors.length === 0) {
+      this.showToast(chrome.i18n.getMessage('noTokensToExport'), 'error');
+      return;
+    }
 
     if ((format === 'tailwind' || format === 'w3c') && !this.isPro) {
       document.getElementById('upgrade-modal')?.removeAttribute('hidden');
@@ -556,8 +580,7 @@ class PopupApp {
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
     toast.textContent = message;
-    const popupRoot = document.getElementById('app') || document.body;
-    popupRoot.appendChild(toast);
+    document.body.appendChild(toast);
 
     setTimeout(() => {
       toast.classList.add('show');

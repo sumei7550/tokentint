@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
-import { cookies } from 'next/headers';
+import { headers } from 'next/headers';
 import { LanguageProvider } from '@/components/LanguageProvider';
 
 const siteUrl = 'https://www.tokentint.xyz';
@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   },
   description: defaultDescription,
   applicationName: 'TokenTint',
+  icons: {
+    icon: '/images/brand/icon.png',
+    apple: '/images/brand/icon.png',
+  },
   keywords: [
     'color picker chrome extension',
     'website color picker',
@@ -26,6 +30,7 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: '/',
+    languages: { en: '/', 'zh-CN': '/zh-CN', 'x-default': '/' },
   },
   openGraph: {
     type: 'website',
@@ -64,12 +69,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const savedLocale = cookies().get('tokentint-locale')?.value;
-  const initialLocale = savedLocale === 'zh-CN' ? 'zh-CN' : 'en';
+  const locale = headers().get('x-tokentint-locale') === 'zh-CN' ? 'zh-CN' : 'en';
 
   return (
-    <html lang={initialLocale}>
-      <body><LanguageProvider initialLocale={initialLocale}>{children}</LanguageProvider></body>
+    <html lang={locale}>
+      <body><LanguageProvider initialLocale={locale}>{children}</LanguageProvider></body>
     </html>
   );
 }
