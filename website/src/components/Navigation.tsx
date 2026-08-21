@@ -1,12 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import LanguageToggle from './LanguageToggle';
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { useLanguage, localizedPath } from './LanguageProvider';
 
 export default function Navigation() {
   const { locale } = useLanguage();
+  const pathname = usePathname();
   const path = (href: string) => localizedPath(href, locale);
   const [productOpen, setProductOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -31,6 +33,11 @@ export default function Navigation() {
         ['Design Token Generator', '/design-token-generator'],
         ['Tailwind Color Generator', '/tailwind-color-generator'],
       ];
+
+  useEffect(() => {
+    setProductOpen(false);
+    setProductExpanded(false);
+  }, [pathname]);
 
   useEffect(() => {
     const handlePointerDown = (event: PointerEvent) => {
