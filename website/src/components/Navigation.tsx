@@ -122,7 +122,7 @@ export default function Navigation() {
           </ul>
           <ul className="nav-links nav-actions">
             <li><LanguageToggle /></li>
-            <li><a href="https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm" className="nav-cta">{copy.cta}</a></li>
+            <li><a href="https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm?utm_source=website" className="nav-cta">{copy.cta}</a></li>
           </ul>
           <div className="mobile-nav-controls" ref={mobileMenuRef}>
             <LanguageToggle />
@@ -151,7 +151,7 @@ export default function Navigation() {
                 <a href={`${path('/')}#free-workflow`} onClick={() => setMobileMenuOpen(false)}>{copy.features}</a>
                 <Link href={path('/pricing')} onClick={() => setMobileMenuOpen(false)}>{copy.pricing}</Link>
                 <Link href={path('/support')} onClick={() => setMobileMenuOpen(false)}>{copy.support}</Link>
-                <a href="https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm" className="mobile-nav-cta" onClick={() => setMobileMenuOpen(false)}>{copy.cta}</a>
+                <a href="https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm?utm_source=website" className="mobile-nav-cta" onClick={() => setMobileMenuOpen(false)}>{copy.cta}</a>
                 </div>
               </>
             )}

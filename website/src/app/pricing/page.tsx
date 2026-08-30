@@ -5,7 +5,7 @@ import PricingCard from '@/components/PricingCard';
 import { localizedPath, useLanguage } from '@/components/LanguageProvider';
 
 const chromeStoreUrl =
-  'https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm';
+  'https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm?utm_source=website';
 
 export default function PricingPage() {
   const { locale } = useLanguage();

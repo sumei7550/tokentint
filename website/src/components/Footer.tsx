@@ -15,7 +15,7 @@ export default function Footer() {
       description: 'Pick colors. Build palettes. Ship design tokens.', product: 'Product', extension: 'Chrome Extension', pricing: 'Pricing', upgrade: 'Upgrade',
       resources: 'Resources', support: 'Support', faq: 'FAQ', contact: 'Contact', legal: 'Legal', privacy: 'Privacy', terms: 'Terms', refunds: 'Refunds', rights: 'All rights reserved.',
     };
-  const chromeStoreUrl = 'https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm';
+  const chromeStoreUrl = 'https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm?utm_source=website';
   return (
     <footer className="footer">
       <div className="container">

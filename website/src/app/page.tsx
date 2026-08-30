@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import { localizedPath, useLanguage } from '@/components/LanguageProvider';
 import PricingCard from '@/components/PricingCard';
 
-const chromeStoreUrl = 'https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm';
+const chromeStoreUrl = 'https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm?utm_source=website';
 
 const content = {
   en: {

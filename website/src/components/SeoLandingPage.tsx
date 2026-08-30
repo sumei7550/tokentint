@@ -6,7 +6,7 @@ import Footer from './Footer';
 import { useLanguage } from './LanguageProvider';
 
 export const chromeStoreUrl =
-  'https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm';
+  'https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm?utm_source=website';
 
 export type SeoLandingPageProps = {
   h1: string;
