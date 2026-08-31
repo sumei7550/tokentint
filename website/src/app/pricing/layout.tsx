@@ -20,8 +20,19 @@ export default function PricingLayout({ children }: { children: React.ReactNode 
     description: isChinese
       ? 'TokenTint Pro 一次性购买，支持设计令牌导出以及 Tailwind/W3C 令牌导出。'
       : 'TokenTint Pro is a one-time purchase for design token export, including Tailwind and W3C token export.',
+    image: ['https://www.tokentint.xyz/images/screenshots/export-more-pro.png'],
     brand: { '@type': 'Brand', name: 'TokenTint' },
-    offers: { '@type': 'Offer', price: '15', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: `https://www.tokentint.xyz${isChinese ? '/zh-CN/upgrade' : '/upgrade'}` },
+    offers: {
+      '@type': 'Offer',
+      price: '15',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: `https://www.tokentint.xyz${isChinese ? '/zh-CN/pricing' : '/pricing'}`,
+      hasMerchantReturnPolicy: {
+        '@type': 'MerchantReturnPolicy',
+        url: `https://www.tokentint.xyz${isChinese ? '/zh-CN/refunds' : '/refunds'}`,
+      },
+    },
   };
   return <>{children}<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} /></>;
 }
