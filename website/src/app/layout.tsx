@@ -6,7 +6,7 @@ import { LanguageProvider } from '@/components/LanguageProvider';
 const siteUrl = 'https://www.tokentint.xyz';
 const defaultTitle = 'TokenTint — Color Picker Chrome Extension for Design Tokens';
 const defaultDescription =
-  'Pick colors from any website, save palettes, and export CSS variables, Tailwind config, or W3C design tokens. Free Chrome extension for developers and designers.';
+  'Pick colors from websites, save palettes, and export CSS variables, Tailwind config, or W3C design tokens with a free Chrome extension.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

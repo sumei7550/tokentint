@@ -91,7 +91,7 @@ export default function Navigation() {
       <div className="container">
         <nav className="nav">
             <Link href={path('/')} className="logo" aria-label="TokenTint home">
-            <img className="logo-mark" src="/images/brand/icon.png" alt="" />
+            <img className="logo-mark" src="/images/brand/icon.png" alt="TokenTint logo" />
             <span>TokenTint <small>DESIGN TOKENS</small></span>
           </Link>
           <ul className="nav-links nav-main-links">

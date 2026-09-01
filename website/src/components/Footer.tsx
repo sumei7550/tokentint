@@ -22,7 +22,7 @@ export default function Footer() {
         <div className="footer-main">
           <div className="footer-brand">
             <Link href={path('/')} className="footer-logo" aria-label="TokenTint home">
-            <img className="logo-mark" src="/images/brand/icon.png" alt="" />
+            <img className="logo-mark" src="/images/brand/icon.png" alt="TokenTint logo" />
               <span>TokenTint</span>
             </Link>
             <p>{copy.description}</p>
