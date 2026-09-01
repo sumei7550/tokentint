@@ -19,6 +19,15 @@ const imageDimensions: Record<string, readonly [number, number]> = {
   '/images/screenshots/export-more-pro.png': [353, 292],
   '/images/screenshots/export-tailwind-pro.png': [375, 600],
   '/images/screenshots/export-W3C-pro.png': [702, 934],
+  '/images/screenshots/website-color-picker/hero-reference.png': [1310, 953],
+  '/images/screenshots/website-color-picker/free-reference-2.png': [375, 600],
+  '/images/screenshots/website-color-picker/free-picked.png': [375, 600],
+  '/images/screenshots/website-color-picker/free-added.png': [375, 600],
+  '/images/screenshots/website-color-picker/pro-reference-detail.png': [375, 600],
+  '/images/screenshots/website-color-picker/pro-extracted.png': [375, 600],
+  '/images/screenshots/website-color-picker/pro-projects.png': [375, 600],
+  '/images/screenshots/website-color-picker/pro-tokens.png': [375, 600],
+  '/images/screenshots/website-color-picker/pro-exported.png': [375, 600],
 };
 
 export type SeoLandingPageProps = {
@@ -178,5 +187,5 @@ function getPageVisual(h1: string): NonNullable<SeoLandingPageProps['visual']> {
   return { heroSrc: '/images/screenshots/pick-color-free.png', heroAlt: 'TokenTint Pick Color feature in the Chrome extension', showcaseTitle: 'A real color workflow, from click to code.', showcase: [{ src: '/images/screenshots/pick-color-free.png', alt: 'TokenTint Pick Color' }] };
 }
 
-function ProductVisual({ visual }: { visual: NonNullable<SeoLandingPageProps['visual']> }) { const [width, height] = imageDimensions[visual.heroSrc]; return <div className="product-mockup"><div className="mockup-glow" /><div className={`real-product-visual${visual.heroSize === 'compact' ? ' compact' : ''}${visual.heroSize === 'short' ? ' short' : ''}`}><img src={visual.heroSrc} alt={visual.heroAlt} width={width} height={height} fetchPriority="high" /></div></div> }
-function ShowcaseCard({ title, description, label, src, alt }: { title: string; description?: string; label: string; src: string; alt: string }) { const { locale } = useLanguage(); const [width, height] = imageDimensions[src]; return <article className="showcase-card"><div className="showcase-card-top"><span>{label}</span><span>TokenTint</span></div><div className="showcase-visual real-showcase-visual"><img src={src} alt={alt} width={width} height={height} /></div><h3>{title}</h3>{description && <p>{description}</p>}<a href={chromeStoreUrl}>{locale === 'zh-CN' ? '探索工作流' : 'Explore workflow'}</a></article> }
+function ProductVisual({ visual }: { visual: NonNullable<SeoLandingPageProps['visual']> }) { const [width, height] = imageDimensions[visual.heroSrc] ?? [1, 1]; return <div className="product-mockup"><div className="mockup-glow" /><div className={`real-product-visual${visual.heroSize === 'compact' ? ' compact' : ''}${visual.heroSize === 'short' ? ' short' : ''}`}><img src={visual.heroSrc} alt={visual.heroAlt} width={width} height={height} fetchPriority="high" /></div></div> }
+function ShowcaseCard({ title, description, label, src, alt }: { title: string; description?: string; label: string; src: string; alt: string }) { const { locale } = useLanguage(); const [width, height] = imageDimensions[src] ?? [1, 1]; return <article className="showcase-card"><div className="showcase-card-top"><span>{label}</span><span>TokenTint</span></div><div className="showcase-visual real-showcase-visual"><img src={src} alt={alt} width={width} height={height} /></div><h3>{title}</h3>{description && <p>{description}</p>}<a href={chromeStoreUrl}>{locale === 'zh-CN' ? '探索工作流' : 'Explore workflow'}</a></article> }
