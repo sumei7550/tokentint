@@ -8,6 +8,19 @@ import { useLanguage } from './LanguageProvider';
 export const chromeStoreUrl =
   'https://chromewebstore.google.com/detail/tokentint-%E2%80%93-color-picker/ifcilnndiaddmoppdpnhboaofffnjmbm?utm_source=website';
 
+const imageDimensions: Record<string, readonly [number, number]> = {
+  '/images/screenshots/pick-color-free.png': [706, 602],
+  '/images/screenshots/pick-color-free2.png': [345, 481],
+  '/images/screenshots/20-history.png': [534, 876],
+  '/images/screenshots/project-add-token-free.png': [373, 604],
+  '/images/screenshots/extract-colors-pro.png': [756, 601],
+  '/images/screenshots/extract-colors-pro3.png': [348, 478],
+  '/images/screenshots/project-more-pro2.png': [376, 344],
+  '/images/screenshots/export-more-pro.png': [353, 292],
+  '/images/screenshots/export-tailwind-pro.png': [375, 600],
+  '/images/screenshots/export-W3C-pro.png': [702, 934],
+};
+
 export type SeoLandingPageProps = {
   h1: string;
   intro: string;
@@ -165,5 +178,5 @@ function getPageVisual(h1: string): NonNullable<SeoLandingPageProps['visual']> {
   return { heroSrc: '/images/screenshots/pick-color-free.png', heroAlt: 'TokenTint Pick Color feature in the Chrome extension', showcaseTitle: 'A real color workflow, from click to code.', showcase: [{ src: '/images/screenshots/pick-color-free.png', alt: 'TokenTint Pick Color' }] };
 }
 
-function ProductVisual({ visual }: { visual: NonNullable<SeoLandingPageProps['visual']> }) { return <div className="product-mockup"><div className="mockup-glow" /><div className={`real-product-visual${visual.heroSize === 'compact' ? ' compact' : ''}${visual.heroSize === 'short' ? ' short' : ''}`}><img src={visual.heroSrc} alt={visual.heroAlt} /></div></div> }
-function ShowcaseCard({ title, description, label, src, alt }: { title: string; description?: string; label: string; src: string; alt: string }) { const { locale } = useLanguage(); return <article className="showcase-card"><div className="showcase-card-top"><span>{label}</span><span>TokenTint</span></div><div className="showcase-visual real-showcase-visual"><img src={src} alt={alt} /></div><h3>{title}</h3>{description && <p>{description}</p>}<a href={chromeStoreUrl}>{locale === 'zh-CN' ? '探索工作流' : 'Explore workflow'}</a></article> }
+function ProductVisual({ visual }: { visual: NonNullable<SeoLandingPageProps['visual']> }) { const [width, height] = imageDimensions[visual.heroSrc]; return <div className="product-mockup"><div className="mockup-glow" /><div className={`real-product-visual${visual.heroSize === 'compact' ? ' compact' : ''}${visual.heroSize === 'short' ? ' short' : ''}`}><img src={visual.heroSrc} alt={visual.heroAlt} width={width} height={height} fetchPriority="high" /></div></div> }
+function ShowcaseCard({ title, description, label, src, alt }: { title: string; description?: string; label: string; src: string; alt: string }) { const { locale } = useLanguage(); const [width, height] = imageDimensions[src]; return <article className="showcase-card"><div className="showcase-card-top"><span>{label}</span><span>TokenTint</span></div><div className="showcase-visual real-showcase-visual"><img src={src} alt={alt} width={width} height={height} /></div><h3>{title}</h3>{description && <p>{description}</p>}<a href={chromeStoreUrl}>{locale === 'zh-CN' ? '探索工作流' : 'Explore workflow'}</a></article> }

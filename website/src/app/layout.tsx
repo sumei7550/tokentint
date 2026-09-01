@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   description: defaultDescription,
   applicationName: 'TokenTint',
   icons: {
-    icon: '/images/brand/icon.png',
-    apple: '/images/brand/icon.png',
+    icon: '/images/brand/icon-96.png',
+    apple: '/images/brand/icon-180.png',
   },
   keywords: [
     'color picker chrome extension',
