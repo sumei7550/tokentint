@@ -25,7 +25,7 @@ Features:
 - Pro adds multiple project palettes, Tailwind Config export, W3C Design Tokens export, and optional extraction of key computed colors from the active webpage.
 - Use light or dark theme settings.
 
-Color history, palettes, settings, and local entitlement state are stored in Chrome local storage. TokenTint has no advertising or analytics. Page colors are read only after you choose Extract Page Colors, and page content is not uploaded to TokenTint servers.
+Color history, palettes, settings, and local entitlement state are stored in Chrome local storage. The TokenTint extension has no advertising or product usage analytics. The website uses limited analytics separately. Page colors are read only after you choose Extract Page Colors, and page content is not uploaded to TokenTint servers.
 
 Some Pro features require a one-time purchase. Payment is handled by Creem on the TokenTint website. See the privacy policy, terms, and refund policy before purchasing.
 

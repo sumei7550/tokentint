@@ -10,7 +10,7 @@
 ## Core Principles
 
 1. **Local-first** - All data stored in browser
-2. **Privacy-focused** - No analytics, no tracking
+2. **Privacy-focused** - Extension data remains local; website analytics is limited to explicit `web_` events
 3. **Offline-capable** - Free features require no network
 4. **No subscriptions** - One-time purchase only
 5. **Developer tool** - Clean, functional design

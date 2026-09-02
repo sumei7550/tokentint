@@ -11,6 +11,7 @@ This document maps all data collection, storage, and transmission in TokenTint f
 | User Content | Colors, project names | Feature functionality | Local browser | None |
 | Purchase Data | Email address | License delivery | Server (transient) | Creem (payment processor) |
 | License Data | Activation token | Pro feature unlock | Local browser | Server (verify only) |
+| Website Analytics | Page, CTA, Store, language, FAQ interaction events | Understand website usage and improve conversion flow | Mixpanel | Mixpanel |
 
 ## Detailed Data Inventory
 
@@ -79,8 +80,8 @@ popup; they must not be represented as available user controls until UI is added
 - User accounts
 - Email addresses (long-term)
 - Payment details (handled by Creem)
-- Usage analytics
-- Tracking cookies
+- Extension usage analytics
+- Tracking cookies for the extension
 
 ### Network Requests
 
@@ -148,16 +149,21 @@ popup; they must not be represented as available user controls until UI is added
 **Privacy Policy:** https://policies.google.com/privacy  
 **Our Control:** Distribution platform
 
-## No Analytics or Tracking
+## Website Analytics
 
-TokenTint does NOT use:
-- Google Analytics
-- Mixpanel
-- Segment
-- Amplitude
-- Hotjar
-- Any tracking pixels
-- Any cookies (website is stateless)
+The website uses Mixpanel for limited first-party product analytics.
+
+Tracked website events use the `web_` prefix, including:
+- `web_page_view`
+- `web_cta_click`
+- `web_store_click`
+- `web_language_switch`
+- `web_external_click`
+- `web_faq_expand`
+
+Website analytics does not intentionally send extension colors, project palettes, page content, browsing history, email addresses, order IDs, activation tokens, or payment details. The Chrome extension does not send product usage analytics in this phase.
+
+The website sends only explicitly defined `web_` events. Autocapture and session replay are disabled. Visitors can contact support to request that future analytics processing stop.
 
 ## Permissions Justification
 
@@ -250,7 +256,7 @@ No account = no data on servers to erase
 - ✅ Minimal data collection
 - ✅ Clear purpose for each data point
 - ✅ User control (export, delete)
-- ✅ No tracking without consent
+- ✅ Website tracking is limited to documented events
 - ✅ Data portability (JSON export)
 - ✅ Privacy policy available
 

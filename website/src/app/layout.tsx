@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { headers } from 'next/headers';
 import { LanguageProvider } from '@/components/LanguageProvider';
+import { AnalyticsProvider } from '@/components/AnalyticsProvider';
 
 const siteUrl = 'https://www.tokentint.xyz';
 const defaultTitle = 'TokenTint — Color Picker Chrome Extension for Design Tokens';
@@ -73,7 +74,7 @@ export default function RootLayout({
 
   return (
     <html lang={locale}>
-      <body><LanguageProvider initialLocale={locale}>{children}</LanguageProvider></body>
+      <body><LanguageProvider initialLocale={locale}><AnalyticsProvider>{children}</AnalyticsProvider></LanguageProvider></body>
     </html>
   );
 }

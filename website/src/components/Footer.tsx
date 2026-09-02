@@ -28,7 +28,7 @@ export default function Footer() {
             <p>{copy.description}</p>
           </div>
           <div className="footer-columns">
-            <div className="footer-column"><h2>{copy.product}</h2><Link href={chromeStoreUrl}>{copy.extension}</Link><Link href={path('/pricing')}>{copy.pricing}</Link><Link href={path('/upgrade')}>{copy.upgrade}</Link></div>
+            <div className="footer-column"><h2>{copy.product}</h2><Link href={chromeStoreUrl} data-analytics-location="footer">{copy.extension}</Link><Link href={path('/pricing')}>{copy.pricing}</Link><Link href={path('/upgrade')}>{copy.upgrade}</Link></div>
             <div className="footer-column"><h2>{copy.resources}</h2><Link href={path('/support')}>{copy.support}</Link><Link href={path('/faq')}>{copy.faq}</Link><a href="mailto:support@tokentint.xyz">{copy.contact}</a></div>
             <div className="footer-column"><h2>{copy.legal}</h2><Link href={path('/privacy')}>{copy.privacy}</Link><Link href={path('/terms')}>{copy.terms}</Link><Link href={path('/refunds')}>{copy.refunds}</Link></div>
           </div>

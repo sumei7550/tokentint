@@ -235,7 +235,7 @@ Pro Upgrade ($15)
 - ❌ **不要发博客文章刷流量**（"10 best color pickers of 2026" 那种）。用户不要，Google 也在压 AI/低质长文的权重。
 - ❌ **不要 keyword stuffing**：不要把 "color picker chrome extension eyedropper hex rgb hsl tailwind" 一口气堆进 title 或 meta。Google 会截断 + 认定 spam。当前 title 关键词密度是 0，改后目标是每个词 1 次，自然通顺。
 - ❌ **不要为了 SEO 加占位文案** —— 例如给 `/privacy` `/terms` 塞产品关键词。合规页保持纯净。
-- ❌ **不要加分析 / 追踪脚本**。项目在 [AGENTS.md](AGENTS.md) 和 [website/src/app/privacy/page.tsx](website/src/app/privacy/page.tsx) 里已经承诺 "no analytics / no tracking"。装 GA / Plausible / PostHog 都会违背这个承诺。用 Search Console + Chrome Web Store Dashboard + Vercel Analytics（如果启用需先改隐私声明）来看数据，或者干脆用 URL 参数 (`?src=ext-popup`) + 服务端日志做粗粒度归因。
+- ✅ **官网分析必须保持显式事件和最小数据范围**。当前官网使用 Mixpanel 的 `web_` 事件，不启用 Autocapture 或 Session Replay；扩展仍不发送产品使用分析。新增分析能力时必须同步更新隐私政策和数据地图。
 - ❌ **不要伪造 hreflang** ——目前中文页不真的存在，加 hreflang 会被 Google 判为 misconfig。要做就 SSR 出中文页，再加。
 - ❌ **不要在 Chrome Web Store 描述里堆关键词**。当前 `_locales/en/messages.json` 的 title `TokenTint – Color Picker & Design Tokens` 已经够用，商店会因为 keyword stuffing 拒审。
 - ❌ **不要拆太多页面** —— 6 个落地页 + `/tools` 索引就够，别一口气上 20 个空壳页，会稀释权重。
@@ -254,8 +254,6 @@ Pro Upgrade ($15)
 
 **Audit 完成。等待下一步指令。**
 建议下一步先做 P0（title / meta / robots / sitemap / OG / JSON-LD / H1 修正），一次改完再进 P1 落地页内容。
-
-
 
 
 

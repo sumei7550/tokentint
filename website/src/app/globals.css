@@ -990,6 +990,7 @@ body {
 .hero-site-layout::before { content:""; display:block; height:230px; border-radius:8px; background:#e2e6ef; }
 .hero-site-layout i { display:block; height:12px; margin-bottom:12px; border-radius:5px; background:#d8dde8; }
 .hero-site-layout i:nth-child(2) { width:72%; }.hero-site-layout i:nth-child(3) { width:88%; }
+
 .hero-popup-card { width:min(100%,420px); position:relative; z-index:1; overflow:hidden; border:8px solid rgba(255,255,255,.92); border-radius:20px; background:#fff; box-shadow:0 34px 80px rgba(26,24,61,.24),0 8px 22px rgba(26,24,61,.12); transform:rotate(1deg) translate(16px,-4px); }
 .hero-demo { aspect-ratio:auto; object-fit:contain; object-position:center; }
 @media (max-width:640px) { .hero-popup-card { transform:rotate(1deg); } }

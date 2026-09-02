@@ -26,7 +26,7 @@ Long description:
 >
 > Pro adds multiple project palettes, Tailwind Config and W3C Design Tokens exports, and on-demand extraction of key computed colors from the active webpage.
 >
-> Your color history, palettes, and settings stay in Chrome local storage. TokenTint has no analytics or advertising. The extension only reads the active page when you explicitly use Extract Page Colors.
+> Your color history, palettes, and settings stay in Chrome local storage. The TokenTint extension does not send product usage analytics or use advertising. The website uses limited analytics separately. The extension only reads the active page when you explicitly use Extract Page Colors.
 >
 > Some Pro features require a one-time purchase. Payment is handled on the TokenTint website by Creem. See the privacy policy, terms, and refund policy before purchasing.
 
@@ -45,7 +45,7 @@ Privacy URL: https://www.tokentint.xyz/privacy
 - Personal data: Email address, only for Pro purchase, license activation, or purchase restoration.
 - Website content: Computed style colors from the active tab, only after the user clicks Extract Page Colors; not uploaded to our server.
 - Purpose: Core extension functionality and license delivery/restoration.
-- Sharing: Purchase information is handled by Creem, the payment processor; no sale, advertising, or analytics.
+- Sharing: Purchase information is handled by Creem, the payment processor; the extension does not use data for sale, advertising, or product usage analytics.
 - Authentication information: Activation token is sent only to verify a Pro license and is stored locally for entitlement state.
 - Data deletion: Users can clear extension data in Chrome; purchase/license requests are transient and not retained as a user account.
 - Limited Use certification: certify only after confirming the dashboard answers match the live privacy policy and deployed behavior.

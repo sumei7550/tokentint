@@ -3,9 +3,13 @@
 import { useLanguage, localizedPath } from './LanguageProvider';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import { useAnalytics } from './AnalyticsProvider';
+import { webEvents } from '@/lib/analytics-events';
+import { getPageName } from '@/lib/analytics';
 
 export default function LanguageToggle() {
   const { locale, setLocale } = useLanguage();
+  const { track } = useAnalytics();
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -20,6 +24,13 @@ export default function LanguageToggle() {
   }, []);
 
   const chooseLocale = (nextLocale: 'en' | 'zh-CN') => {
+    if (nextLocale !== locale) {
+      track(webEvents.languageSwitch, {
+        from_locale: locale,
+        to_locale: nextLocale,
+        page_name: getPageName(pathname),
+      });
+    }
     const search = window.location.search;
     setLocale(nextLocale);
     router.push(`${localizedPath(pathname ?? '/', nextLocale)}${search}`);

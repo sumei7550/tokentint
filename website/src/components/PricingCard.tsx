@@ -32,7 +32,11 @@ export default function PricingCard({
       <ul className="features-list">
         {features.map((feature) => <li key={feature}>{feature}</li>)}
       </ul>
-      <Link href={href} className="btn">
+      <Link
+        href={href}
+        className="btn"
+        data-analytics-location={href.startsWith('https://chromewebstore.google.com/detail/tokentint-') ? 'pricing_free' : undefined}
+      >
         {cta}
       </Link>
     </div>

@@ -490,4 +490,4 @@ NEXT_PUBLIC_SITE_URL=https://www.tokentint.xyz
 - Server logs
 - Webhook success rate
 
-**No third-party analytics** (privacy principle)
+**Website analytics:** Mixpanel receives manually defined `web_` events. Autocapture and session replay are disabled. The Chrome extension remains without product usage analytics in this phase.

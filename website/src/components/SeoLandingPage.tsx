@@ -130,7 +130,7 @@ export default function SeoLandingPage(props: SeoLandingPageProps) {
                 <h1>{copy.h1}</h1>
                 <p className="seo-intro">{copy.intro}</p>
                 <div className="hero-ctas">
-                  <a href={chromeStoreUrl} className="cta-button">{locale === 'zh-CN' ? '添加到 Chrome — 免费' : 'Add to Chrome — Free'}</a>
+                  <a href={chromeStoreUrl} className="cta-button" data-analytics-location="seo_hero">{locale === 'zh-CN' ? '添加到 Chrome — 免费' : 'Add to Chrome — Free'}</a>
                   <Link href={path('/pricing')} className="cta-secondary">{locale === 'zh-CN' ? '比较方案' : 'Compare plans'}</Link>
                 </div>
                 <p className="hero-note"><span>✓</span> {locale === 'zh-CN' ? '永久免费 · 无需信用卡' : 'Free forever · No credit card required'}</p>
@@ -164,7 +164,7 @@ export default function SeoLandingPage(props: SeoLandingPageProps) {
           <p className="seo-copy"><strong>{locale === 'zh-CN' ? '为什么选择 TokenTint，而不是基础取色器？' : 'Why TokenTint instead of a basic color picker?'}</strong> {copy.why}</p>
         </div></section>
 
-        <section className="seo-trust-strip"><div className="container"><div className="seo-trust-grid"><div><strong>{locale === 'zh-CN' ? '本地优先' : 'Local-first'}</strong><span>{locale === 'zh-CN' ? '颜色和项目保存在 Chrome 本地存储。' : 'Colors and projects stay in Chrome local storage.'}</span></div><div><strong>{locale === 'zh-CN' ? '无追踪' : 'No tracking'}</strong><span>{locale === 'zh-CN' ? '不使用分析或广告追踪工具。' : 'No analytics or advertising trackers.'}</span></div><div><strong>{locale === 'zh-CN' ? '一次购买' : 'One-time Pro'}</strong><span>{locale === 'zh-CN' ? 'Pro 无订阅，30 天内可申请退款。' : 'No subscription; 30-day refund policy.'}</span></div></div></div></section>
+        <section className="seo-trust-strip"><div className="container"><div className="seo-trust-grid"><div><strong>{locale === 'zh-CN' ? '本地优先' : 'Local-first'}</strong><span>{locale === 'zh-CN' ? '颜色和项目保存在 Chrome 本地存储。' : 'Colors and projects stay in Chrome local storage.'}</span></div><div><strong>{locale === 'zh-CN' ? '有限分析' : 'Limited analytics'}</strong><span>{locale === 'zh-CN' ? '官网只记录定义好的交互事件。' : 'The website records only defined interaction events.'}</span></div><div><strong>{locale === 'zh-CN' ? '一次购买' : 'One-time Pro'}</strong><span>{locale === 'zh-CN' ? 'Pro 无订阅，30 天内可申请退款。' : 'No subscription; 30-day refund policy.'}</span></div></div></div></section>
 
         <section className="seo-section seo-muted"><div className="container faq-section">
           <h2>{locale === 'zh-CN' ? '常见问题' : 'Frequently asked questions'}</h2>
@@ -188,4 +188,4 @@ function getPageVisual(h1: string): NonNullable<SeoLandingPageProps['visual']> {
 }
 
 function ProductVisual({ visual }: { visual: NonNullable<SeoLandingPageProps['visual']> }) { const [width, height] = imageDimensions[visual.heroSrc] ?? [1, 1]; return <div className="product-mockup"><div className="mockup-glow" /><div className={`real-product-visual${visual.heroSize === 'compact' ? ' compact' : ''}${visual.heroSize === 'short' ? ' short' : ''}`}><img src={visual.heroSrc} alt={visual.heroAlt} width={width} height={height} fetchPriority="high" /></div></div> }
-function ShowcaseCard({ title, description, label, src, alt }: { title: string; description?: string; label: string; src: string; alt: string }) { const { locale } = useLanguage(); const [width, height] = imageDimensions[src] ?? [1, 1]; return <article className="showcase-card"><div className="showcase-card-top"><span>{label}</span><span>TokenTint</span></div><div className="showcase-visual real-showcase-visual"><img src={src} alt={alt} width={width} height={height} /></div><h3>{title}</h3>{description && <p>{description}</p>}<a href={chromeStoreUrl}>{locale === 'zh-CN' ? '探索工作流' : 'Explore workflow'}</a></article> }
+function ShowcaseCard({ title, description, label, src, alt }: { title: string; description?: string; label: string; src: string; alt: string }) { const { locale } = useLanguage(); const [width, height] = imageDimensions[src] ?? [1, 1]; return <article className="showcase-card"><div className="showcase-card-top"><span>{label}</span><span>TokenTint</span></div><div className="showcase-visual real-showcase-visual"><img src={src} alt={alt} width={width} height={height} /></div><h3>{title}</h3>{description && <p>{description}</p>}<a href={chromeStoreUrl} data-analytics-location="seo_showcase">{locale === 'zh-CN' ? '探索工作流' : 'Explore workflow'}</a></article> }

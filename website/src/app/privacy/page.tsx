@@ -35,8 +35,9 @@ export default function PrivacyPage() {
             </section>
 
             <section style={{ marginBottom: '32px' }}>
-              <h2>{zh ? '不使用分析工具' : 'No Analytics'}</h2>
-              <p>{zh ? '我们不使用分析或追踪工具，你对 TokenTint 的使用完全私密。' : 'We do not use any analytics or tracking tools. Your usage of TokenTint is completely private.'}</p>
+              <h2>{zh ? '官网分析' : 'Website Analytics'}</h2>
+              <p>{zh ? 'TokenTint 官网使用 Mixpanel 了解页面、按钮、语言切换和购买流程的使用情况，用于改进官网内容和转化流程。' : 'The TokenTint website uses Mixpanel to understand page visits, button clicks, language switches, and checkout flow usage so we can improve the website and conversion flow.'}</p>
+              <p>{zh ? '官网分析不会收集扩展中的颜色、项目、页面内容、浏览历史、邮箱、订单号或激活令牌。你可以通过联系支持邮箱请求停止后续分析数据处理。' : 'Website analytics does not collect extension colors, projects, page content, browsing history, email addresses, order IDs, or activation tokens. You can contact support to request that future analytics processing stop.'}</p>
             </section>
 
             <section style={{ marginBottom: '32px' }}>
@@ -62,7 +63,7 @@ export default function PrivacyPage() {
 
             <section style={{ marginBottom: '32px' }}>
               <h2>{zh ? '数据存储与共享' : 'Data Storage and Sharing'}</h2>
-              <p>{zh ? '颜色历史、项目调色板、设置和本地 Pro 权益都保存在 Chrome 扩展的本地存储中，不会同步到你的 Google 账号。购买和许可请求由我们的服务器及支付处理商 Creem 处理。我们不出售数据、不将其用于广告，也不使用分析或追踪工具。' : 'Color history, project palettes, settings, and the local Pro entitlement are stored in Chrome local extension storage and are not synced to your Google account. Purchase and license requests are handled by our server and Creem, our payment processor. We do not sell data, use it for advertising, or use analytics or tracking tools.'}</p>
+              <p>{zh ? '颜色历史、项目调色板、设置和本地 Pro 权益都保存在 Chrome 扩展的本地存储中，不会同步到你的 Google 账号。购买和许可请求由我们的服务器及支付处理商 Creem 处理。TokenTint 不出售数据，也不将数据用于广告。Chrome 扩展本身不发送产品使用分析；官网使用 Mixpanel 进行有限的官网交互分析。' : 'Color history, project palettes, settings, and the local Pro entitlement are stored in Chrome local extension storage and are not synced to your Google account. Purchase and license requests are handled by our server and Creem, our payment processor. TokenTint does not sell data or use it for advertising. The Chrome extension itself does not send product usage analytics; the website uses Mixpanel for limited website interaction analytics.'}</p>
             </section>
 
             <section style={{ marginBottom: '32px' }}>
