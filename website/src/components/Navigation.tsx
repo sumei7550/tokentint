@@ -22,14 +22,18 @@ export default function Navigation() {
     : { product: 'Product', features: 'Features', pricing: 'Pricing', support: 'Support', cta: 'Add to Chrome' };
   const productLinks = locale === 'zh-CN'
     ? [
+        ['所有工具', path('/tools')],
         ['Chrome 取色器', path('/color-picker-chrome-extension')],
         ['网站取色器', path('/website-color-picker')],
+        ['CSS Variables 生成器', path('/css-variables-generator')],
         ['设计令牌生成器', path('/design-token-generator')],
         ['Tailwind 颜色生成器', path('/tailwind-color-generator')],
       ]
     : [
+        ['All Tools', '/tools'],
         ['Chrome Color Picker', '/color-picker-chrome-extension'],
         ['Website Color Picker', '/website-color-picker'],
+        ['CSS Variables Generator', '/css-variables-generator'],
         ['Design Token Generator', '/design-token-generator'],
         ['Tailwind Color Generator', '/tailwind-color-generator'],
       ];

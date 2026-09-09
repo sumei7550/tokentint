@@ -4,6 +4,16 @@ Date: 2026-08-15
 Scope: `website/` (Next.js 14 marketing site) + Chrome Web Store listing overlap
 Author: Senior SEO Engineer review, TokenTint project
 
+## 2026-09-09 implementation update
+
+- Added a generated `/sitemap.xml` covering indexable English and Simplified Chinese routes.
+- Added `/css-variables-generator` and `/zh-CN/css-variables-generator` to target the high-intent workflow from website colors to CSS custom properties.
+- Expanded `/website-color-picker` around brand-color extraction, competitor palette research, and CSS/Tailwind export intent without creating overlapping thin pages.
+- Added the CSS Variables page to product navigation and contextual links between the main SEO landing pages.
+- Added `/tools` and `/zh-CN/tools` as non-competing navigation hubs for the five focused color workflows.
+- Expanded the Chrome picker, Tailwind, and design-token pages with eyedropper, color-history, website-to-Tailwind, and website-to-W3C long-tail questions.
+- The findings below remain the original 2026-08-15 audit snapshot; several P0/P1 items have since been implemented.
+
 ---
 
 ## 1. 项目技术分析

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import ChromePicker from '../../color-picker-chrome-extension/page';
+import CssVariables from '../../css-variables-generator/page';
 import DesignTokens from '../../design-token-generator/page';
 import FAQ from '../../faq/page';
 import Pricing from '../../pricing/page';
@@ -11,14 +12,17 @@ import Success from '../../success/page';
 import Support from '../../support/page';
 import Tailwind from '../../tailwind-color-generator/page';
 import Terms from '../../terms/page';
+import Tools from '../../tools/page';
 import Upgrade from '../../upgrade/page';
 import WebsitePicker from '../../website-color-picker/page';
 
 const pages: Record<string, { component: () => React.ReactNode; title: string; description: string }> = {
   'color-picker-chrome-extension': { component: ChromePicker, title: 'Chrome 中文取色器扩展', description: '在 Chrome 中从网页拾取颜色，并保存到项目调色板。' },
   'website-color-picker': { component: WebsitePicker, title: '网站颜色取色器', description: '从网站收集颜色，创建可复用的项目调色板。' },
+  'css-variables-generator': { component: CssVariables, title: 'CSS Variables 生成器', description: '从网页采集颜色，并免费导出可复用的 CSS 自定义属性。' },
   'design-token-generator': { component: DesignTokens, title: '颜色设计令牌生成器', description: '将界面颜色整理并导出为 CSS 或 W3C 设计令牌。' },
   'tailwind-color-generator': { component: Tailwind, title: 'Tailwind 颜色调色板生成器', description: '整理网页颜色并导出 Tailwind 配置起点。' },
+  tools: { component: Tools, title: '颜色取色与设计令牌工具', description: '选择网页取色、CSS Variables、Tailwind 或 W3C Design Tokens 工作流。' },
   pricing: { component: Pricing, title: 'TokenTint 定价', description: '查看 TokenTint 免费版与 Pro 功能。' },
   support: { component: Support, title: 'TokenTint 支持', description: '获取 TokenTint 使用和激活支持。' },
   faq: { component: FAQ, title: 'TokenTint 常见问题', description: '查看 TokenTint 的常见问题与答案。' },
